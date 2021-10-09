@@ -7,18 +7,24 @@
 #include <time.h>
 
 GridStart::GridStart(){
-  width = 0;
-  height = 0;
-  grid[width][height];
+  width = 100;
+  height = 100;
+  grid = new char*[height];
+  for(int i = 0; i < height; i++)
+    grid[i] = new char[width];
 }
 GridStart::GridStart(int w, int h){
   width = w;
   height = h;
-  grid[width][height];
+  grid = new char*[height];
+  for(int i = 0; i < width; i++)
+    grid[i] = new char[width];
 
 }
 GridStart::~GridStart(){
-
+  for(int i = 0; i < height; i++)
+      delete[] grid[i];
+  delete[] grid;
 }
 
 void GridStart::GridRandom(int w, int h, float d){
@@ -27,7 +33,8 @@ void GridStart::GridRandom(int w, int h, float d){
   density = d;
   int value;
   bool isFull = false;
-  grid[w][h];
+  // cout << "before" << endl;
+  // cout << width << " " << height << endl;
   //double for loop to sort through spots
   //LearningLad, C Program to generate random numbers within a range of values
   //https://www.youtube.com/watch?v=ZaZxHzRn-AY
@@ -50,10 +57,10 @@ void GridStart::GridRandom(int w, int h, float d){
   }
   cout << endl;
 }
-  cout << endl;
-  for (int i = 0; i < w; ++i){
-    for (int j = 0; j < h; ++j){
-      cout << " [" << grid[i][j] << "] ";}
+  cout << grid[0][0] << endl;
+  for (int i = 0; i < h; ++i){
+    for (int j = 0; j < w; ++j){
+      cout << " [" << grid[j][i] << "] ";}
     cout << endl;
   };
 }
@@ -95,13 +102,12 @@ void GridStart::GridRandom(int w, int h, float d){
          cout << row << endl;
        row++;}
          cout << "readfile" << endl;
-         cout << grid[0][0] << endl;
-       for (int k = 0; k < h; ++k){
-         for (int j = 0; j < w; ++j){
-           cout << " [" << grid[k][j] << "] ";
-         }
-         cout << endl;
-       }
+         cout << grid[0][6] << endl;
+         for (int i = 0; i < h; ++i){
+           for (int j = 0; j < w; ++j){
+             cout << " [" << grid[j][i] << "] ";}
+           cout << endl;
+       };
 
    } else {
      cout << "No file found, please enter again" << endl;

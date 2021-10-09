@@ -12,9 +12,9 @@ using namespace std;
 int main(int argc, char** argv){
 
   Simulation *sim = new Simulation();
-  sim->start();
+  // sim->start();
   GridStart *gs = new GridStart();
-  // gs->GridFile("input.txt");
+  gs->GridFile("input.txt");
   // gs->GridRandom(5, 7, 0.15);
 
   delete gs;

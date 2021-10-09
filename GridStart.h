@@ -10,7 +10,7 @@ public:
   ~GridStart();
   void GridRandom(int w, int h, float d);
   void GridFile(string inputFile);
-  char grid[0][0];
+  char** grid;
 private:
   int height;
   int width;
