@@ -5,7 +5,7 @@ CPSC 350-02
 Assignment 3 - Simulation.cpp */
 
 #include "Simulation.h"
-#include "FileReader.h"
+#include "GridStart.h"
 
 Simulation::Simulation(){
   // default constructor
@@ -16,6 +16,7 @@ Simulation::~Simulation(){
 }
 
 void Simulation::start(){
+  GridStart *gs = new GridStart();
   try{
     bool charMatch = false;
     while (!charMatch){
@@ -40,6 +41,7 @@ void Simulation::start(){
           cout << "width: " << userWidth << endl;
           cout << "height: " << userHeight << endl;
           cout << "density: " << userDensity << endl;
+          gs->GridRandom(userWidth, userHeight, userDensity);
           //go to grid start
           //Grid *gameGrid = new Grid(userWidth, userHeight);
         }
@@ -53,15 +55,15 @@ void Simulation::start(){
       else if (tolower(userInput) == 'f'){
         cout << "You selected file input!" << endl;
         charMatch = true;
-        FileReader *fr = new FileReader();
+        // FileReader *fr = new FileReader();
 
         cout << "Please enter the name of the file you would like to use: " << endl;
         string userFile;
         cin >> userFile;
 
-        fr->readConfiguration(userFile);
-
-        delete fr;
+        // fr->readConfiguration(userFile);
+        gs->GridFile(userFile);
+        delete gs;
       }
     }
     //delete gameGrid;
