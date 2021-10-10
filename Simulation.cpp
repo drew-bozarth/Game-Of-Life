@@ -54,12 +54,16 @@ void Simulation::start(){
         cout << "You selected file input!" << endl;
         charMatch = true;
         FileReader *fr = new FileReader();
+        //change to grid start file method
 
         cout << "Please enter the name of the file you would like to use: " << endl;
         string userFile;
         cin >> userFile;
 
         fr->readConfiguration(userFile);
+        // change to grid start file method
+
+        // run game rules with double array 
 
         delete fr;
       }
