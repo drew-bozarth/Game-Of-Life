@@ -19,11 +19,7 @@ ClassicMode::ClassicMode(string filePath){
 }
 
 ClassicMode::~ClassicMode(){
-<<<<<<< HEAD
-  // delete game;
-=======
   //delete game;
->>>>>>> 6cad7b8d706564a4aadc233f824c52bc5048d0d0
 }
 
 void ClassicMode::runClassicSimulation(){
@@ -44,7 +40,7 @@ void ClassicMode::runClassicSimulation(){
     for (int k = 0: k < height; ++j){
       current = grid[j][k];
         neighbors = gs->checkNeighbors(gridExtend,j,k);
-        current = gs->nextGeneration(current,neighbors);
+        current = gs->nextGen(current,neighbors);
         grid[j][k] = current;
     }
   }
