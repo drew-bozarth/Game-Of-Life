@@ -46,7 +46,7 @@ void GameStart::GridRandom(int w, int h, float d){
       grid[k][i] = 'X';
     } else {
       cout << '-';
-      grid[k][i] = '\0';
+      grid[k][i] = '-';
     }
   }
   cout << endl;
@@ -81,7 +81,7 @@ void GameStart::GridFile(string inputFilePath){
     for (int i = 0; i < str.size(); ++i){
          current = str[i];
          if (current == '-'){
-           grid[i][row] = '\0';
+           grid[i][row] = current;
            cout << grid[i][row] << "-";
          } else if (current == 'x' || current == 'X'){
            grid[i][row] = current;
@@ -140,4 +140,10 @@ int GameStart::checkNeighbors(char** grid, int x, int y){
     ++LiveNeighbors;
 
   return LiveNeighbors;
+}
+
+void GameStart::extendGrid(){
+  gridExtend = new char*[height+1];
+  for(int i = 0; i < height+1; i++)
+    gridExtend[i] = new char[width+1];
 }

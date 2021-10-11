@@ -19,7 +19,9 @@ public:
   void GridRandom(int w, int h, float d);
   void GridFile(string inputFilePath);
   int checkNeighbors(char** grid, int x, int y);
+  void extendGrid();
   char** grid;
+  char** gridExtend;
 private:
   int height;
   int width;
