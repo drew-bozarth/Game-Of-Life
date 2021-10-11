@@ -18,10 +18,31 @@ ClassicMode::ClassicMode(string filePath){
 }
 
 ClassicMode::~ClassicMode(){
-  delete game;
+  // delete game;
 }
 
 void ClassicMode::runClassicSimulation(){
+  GameStart *gs = new GameStart;
+  int neighbors = 0;
+  char current;
+  gridExtend = new char*[height+1];
+  for(int i = 0; i < height+1; i++){
+    gridExtend[i] = new char[width+1];}
   cout << "Running Classic Mode Simulation" << endl;
+  for (int j = 0; j < width; ++j){
+    for (int k = 0: k < height; ++j){
+      gridExtend[j+1][k+1] = grid[j][k];
+    }
+  }
 
-}
+  for (int j = 0; j < width; ++j){
+    for (int k = 0: k < height; ++j){
+      current = grid[j][k];
+        neighbors = gs->checkNeighbors(gridExtend,j,k);
+        current = gs->nextGeneration(current,neighbors);
+        grid[j][k] = current;
+    }
+  }
+
+            //next generation function with if statements
+  }
