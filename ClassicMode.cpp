@@ -1,13 +1,27 @@
 #include "ClassicMode.h"
+#include "GameStart.h"
 
 ClassicMode::ClassicMode(){
   // default constructor
+  int width = 0;
+  int height = 0;
+  int desnity = 0;
+  string inputFilePath = "";
+}
+ClassicMode::ClassicMode(int w, int h, float d){
+  GameStart *game = new GameStart();
+  game->GridRandom(w,h,d);
+}
+ClassicMode::ClassicMode(string filePath){
+  GameStart *game = new GameStart();
+  game->GridFile(filePath);
 }
 
 ClassicMode::~ClassicMode(){
-  // destructor
+  delete game;
 }
 
-void ClassicMode::runClassicSimulation(char** grid){
+void ClassicMode::runClassicSimulation(){
   cout << "Running Classic Mode Simulation" << endl;
+
 }

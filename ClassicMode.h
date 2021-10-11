@@ -10,8 +10,10 @@ using namespace std;
 class ClassicMode{
 public:
   ClassicMode();
+  ClassicMode(int width, int height, float density);
+  ClassicMode(string filePath);
   ~ClassicMode();
-  void runClassicSimulation(char** grid);
+  void runClassicSimulation();
 };
 
 #endif

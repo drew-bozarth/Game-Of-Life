@@ -93,7 +93,7 @@ void Simulation::SelectMode(){
 
   if (modeSelection == 1){
     ClassicMode *cm = new ClassicMode();
-    cm->runClassicSimulation(game->grid);
+    cm->runClassicSimulation();
 
     delete cm;
   }
