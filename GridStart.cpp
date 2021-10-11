@@ -59,8 +59,9 @@ void GridStart::GridRandom(int w, int h, float d){
   };
 }
 
- void GridStart::GridFile(string inputFile){
-   ifstream input {inputFile};
+ void GridStart::GridFile(string inputFilePath){
+   ifstream input;
+   input.open(inputFilePath.c_str());
    if (input.is_open()){
      char current;
      int row = 0;
