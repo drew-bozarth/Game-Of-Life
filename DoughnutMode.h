@@ -10,6 +10,8 @@ using namespace std;
 class DoughnutMode{
 public:
   DoughnutMode();
+  DoughnutMode(int width, int height, float density);
+  DoughnutMode(string filePath);
   ~DoughnutMode();
   void runDoughnutSimulation();
 };

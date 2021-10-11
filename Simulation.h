@@ -19,7 +19,7 @@ public:
   Simulation();
   ~Simulation();
   void start();
-  void SelectMode();
+  int SelectMode();
 private:
   int modeSelection;
 };

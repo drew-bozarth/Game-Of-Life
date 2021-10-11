@@ -3,6 +3,7 @@
 
 ClassicMode::ClassicMode(){
   // default constructor
+  GameStart *game = new GameStart();
   int width = 0;
   int height = 0;
   int desnity = 0;
@@ -18,7 +19,11 @@ ClassicMode::ClassicMode(string filePath){
 }
 
 ClassicMode::~ClassicMode(){
+<<<<<<< HEAD
   // delete game;
+=======
+  //delete game;
+>>>>>>> 6cad7b8d706564a4aadc233f824c52bc5048d0d0
 }
 
 void ClassicMode::runClassicSimulation(){
