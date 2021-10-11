@@ -141,5 +141,3 @@ int GameStart::checkNeighbors(char** grid, int x, int y){
 
   return LiveNeighbors;
 }
-
-void GameStart::
