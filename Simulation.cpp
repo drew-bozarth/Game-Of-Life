@@ -17,6 +17,7 @@ Simulation::~Simulation(){
 
 void Simulation::start(){
   GridStart *gs = new GridStart();
+  GridRules *gr = new GridRules();
   try{
     bool charMatch = false;
     while (!charMatch){
@@ -42,8 +43,7 @@ void Simulation::start(){
           cout << "height: " << userHeight << endl;
           cout << "density: " << userDensity << endl;
           gs->GridRandom(userWidth, userHeight, userDensity);
-          //go to grid start
-          //Grid *gameGrid = new Grid(userWidth, userHeight);
+          gr->SelectMode();
         }
         else {
           cout << "Sorry you must enter an integer for the width and height, and the density as a decimal between 0 and 1." << endl;
@@ -55,18 +55,17 @@ void Simulation::start(){
       else if (tolower(userInput) == 'f'){
         cout << "You selected file input!" << endl;
         charMatch = true;
-        // FileReader *fr = new FileReader();
 
         cout << "Please enter the name of the file you would like to use: " << endl;
         string userFile;
         cin >> userFile;
 
-        // fr->readConfiguration(userFile);
         gs->GridFile(userFile);
-        delete gs;
+        gr->SelectMode();
       }
     }
-    //delete gameGrid;
+    delete gs;
+    delete gr;
   }
 
   catch(runtime_error &excpt){
