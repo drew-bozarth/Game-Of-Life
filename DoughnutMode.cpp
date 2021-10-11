@@ -1,5 +1,5 @@
 #include "DoughnutMode.h"
-#include "GridStart.h"
+#include "GameStart.h"
 
 DoughnutMode::DoughnutMode(){
   // default constructor

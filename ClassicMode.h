@@ -5,11 +5,9 @@
 #include <string>
 #include <fstream>
 
-#include "GameRun.h"
-
 using namespace std;
 
-class ClassicMode: public GameRun{
+class ClassicMode{
 public:
   ClassicMode();
   ~ClassicMode();

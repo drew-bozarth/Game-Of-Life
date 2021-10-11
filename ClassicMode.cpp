@@ -1,5 +1,5 @@
 #include "ClassicMode.h"
-#include "GridStart.h"
+#include "GameStart.h"
 
 ClassicMode::ClassicMode(){
   // default constructor

@@ -1,5 +1,5 @@
-#ifndef GRIDSTART_H
-#define GRIDSTART_H
+#ifndef GAMESTART_H
+#define GAMESTART_H
 
 #include <iostream>
 #include <fstream>
@@ -11,13 +11,14 @@
 
 using namespace std;
 
-class GridStart{
+class GameStart{
 public:
-  GridStart();
-  GridStart(int w,int h);
-  ~GridStart();
+  GameStart();
+  GameStart(int w,int h);
+  ~GameStart();
   void GridRandom(int w, int h, float d);
   void GridFile(string inputFilePath);
+  int checkNeighbors(char** grid, int x, int y);
   char** grid;
 private:
   int height;

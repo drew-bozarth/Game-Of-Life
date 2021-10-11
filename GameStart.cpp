@@ -1,13 +1,13 @@
-#include "GridStart.h"
+#include "GameStart.h"
 
-GridStart::GridStart(){
+GameStart::GameStart(){
   width = 100;
   height = 100;
   grid = new char*[height];
   for(int i = 0; i < height; i++)
     grid[i] = new char[width];
 }
-GridStart::GridStart(int w, int h){
+GameStart::GameStart(int w, int h){
   width = w;
   height = h;
   grid = new char*[height];
@@ -15,13 +15,13 @@ GridStart::GridStart(int w, int h){
     grid[i] = new char[width];
 
 }
-GridStart::~GridStart(){
+GameStart::~GameStart(){
   for(int i = 0; i < height; i++)
       delete[] grid[i];
   delete[] grid;
 }
 
-void GridStart::GridRandom(int w, int h, float d){
+void GameStart::GridRandom(int w, int h, float d){
   width = w;
   height = h;
   density = d;
@@ -59,26 +59,26 @@ void GridStart::GridRandom(int w, int h, float d){
   };
 }
 
- void GridStart::GridFile(string inputFilePath){
-   ifstream input;
-   input.open(inputFilePath.c_str());
-   if (input.is_open()){
-     char current;
-     int row = 0;
-     string str;
-     int w;
-     int h;
-     getline(input,str);
-     h = stoi(str);
-     cout << h << endl;
-     getline(input,str);
-     w = stoi(str);
-     cout << w << endl;
-     grid[w][h];
-     while(getline(input,str)){
-       cout << "got line" << endl;
+void GameStart::GridFile(string inputFilePath){
+  ifstream input;
+  input.open(inputFilePath.c_str());
+  if (input.is_open()){
+   char current;
+   int row = 0;
+   string str;
+   int w;
+   int h;
+   getline(input,str);
+   h = stoi(str);
+   cout << h << endl;
+   getline(input,str);
+   w = stoi(str);
+   cout << w << endl;
+   grid[w][h];
+   while(getline(input,str)){
+     cout << "got line" << endl;
        // cout << str.size() << endl;
-     for (int i = 0; i < str.size(); ++i){
+    for (int i = 0; i < str.size(); ++i){
          current = str[i];
          if (current == '-'){
            grid[i][row] = '\0';
@@ -110,4 +110,36 @@ void GridStart::GridRandom(int w, int h, float d){
    input.close();
    cout << "file closed" << endl;
 
- };
+}
+
+int GameStart::checkNeighbors(char** grid, int x, int y){
+  int LiveNeighbors = 0;
+
+  if (grid[x-1][y-1] != '\0')
+    ++LiveNeighbors;
+       //check top
+  if (grid[x][y-1] != '\0')
+    ++LiveNeighbors;
+       //check topright
+  if (grid[x+1][y-1] != '\0')
+    ++LiveNeighbors;
+       //check left
+  if (grid[x-1][y] != '\0')
+    ++LiveNeighbors;
+       //check right
+  if (grid[x+1][y] != '\0')
+    ++LiveNeighbors;
+       //check bottom left
+  if (grid[x-1][y+1] != '\0')
+    ++LiveNeighbors;
+       //check bottom
+  if (grid[x][y+1] != '\0')
+    ++LiveNeighbors;
+       //check bottom right
+  if (grid[x+1][y+1] != '\0')
+    ++LiveNeighbors;
+
+  return LiveNeighbors;
+}
+
+void GameStart::
