@@ -14,19 +14,20 @@ using namespace std;
 class GameStart{
 public:
   GameStart();
-  virtual ~GameStart();
-  virtual void GridRandom(int w, int h, float d);
-  virtual void GridFile(string inputFilePath);
-  virtual int checkNeighbors(char** grid, int x, int y);
-  virtual void extendGrid();
+  ~GameStart();
+  void GridRandom(int w, int h, float d);
+  void GridFile(string inputFilePath);
+  int checkNeighbors(char** grid, int x, int y);
+  void extendGrid();
   bool isAlive(int x, int y);
   bool isDead(int x, int y);
-  virtual char nextGeneration(char current, int neighbors);
+  char nextGeneration(char current, int neighbors);
   char** grid;
   char** gridExtend;
   int height;
   int width;
   float density;
+  string inputFilePath;
 private:
 
 };

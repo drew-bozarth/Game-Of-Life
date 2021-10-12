@@ -7,13 +7,13 @@
 
 using namespace std;
 
-class ClassicMode : public GameStart{
+class ClassicMode{
 public:
   ClassicMode();
   ClassicMode(int width, int height, float density);
   ClassicMode(string filePath);
   ~ClassicMode();
-  void runClassicSimulation();
+  void runClassicSimulation(char selection);
 };
 
 #endif
