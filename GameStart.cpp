@@ -6,19 +6,27 @@ GameStart::GameStart(){
   grid = new char*[height];
   for(int i = 0; i < height; i++)
     grid[i] = new char[width];
+  gridExtend = new char*[height+1];
+  for(int i = 0; i < height+1; i++){
+    gridExtend[i] = new char[width+1];}
 }
-GameStart::GameStart(int w, int h){
-  width = w;
-  height = h;
-  grid = new char*[height];
-  for(int i = 0; i < width; i++)
-    grid[i] = new char[width];
-
-}
+// GameStart::GameStart(int w, int h){
+//   width = w;
+//   height = h;
+//   grid = new char*[height];
+//   for(int i = 0; i < width; i++)
+//     grid[i] = new char[width];
+//   gridExtend = new char*[height+1];
+//   for(int i = 0; i < height+1; i++){
+//     gridExtend[i] = new char[width+1];}
+// }
 GameStart::~GameStart(){
   for(int i = 0; i < height; i++)
       delete[] grid[i];
+  for(int i = 0; i < height+1; i++)
+      delete[] gridExtend[i];
   delete[] grid;
+  delete[] gridExtend;
 }
 
 void GameStart::GridRandom(int w, int h, float d){

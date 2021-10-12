@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class ClassicMode{
+class ClassicMode : public GameStart{
 public:
   ClassicMode();
   ClassicMode(int width, int height, float density);
