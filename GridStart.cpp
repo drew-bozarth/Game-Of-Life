@@ -110,6 +110,3 @@ void GridStart::GridRandom(int w, int h, float d){
    cout << "file closed" << endl;
 
  };
-
-
-//https://www.delftstack.com/howto/cpp/read-file-char-by-char-cpp/
