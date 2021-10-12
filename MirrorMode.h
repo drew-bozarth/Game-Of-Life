@@ -11,6 +11,7 @@ class MirrorMode{
 public:
   MirrorMode();
   ~MirrorMode();
+  void runMirrorSimulation();
 };
 
 #endif

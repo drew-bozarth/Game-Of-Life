@@ -1,10 +1,4 @@
 #include "GridStart.h"
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <random>
-#include <cstdlib>
-#include <time.h>
 
 GridStart::GridStart(){
   width = 100;

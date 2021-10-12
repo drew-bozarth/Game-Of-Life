@@ -11,6 +11,7 @@ class ClassicMode{
 public:
   ClassicMode();
   ~ClassicMode();
+  void runClassicSimulation();
 };
 
 #endif

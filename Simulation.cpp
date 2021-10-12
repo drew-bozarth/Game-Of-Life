@@ -6,6 +6,7 @@ Assignment 3 - Simulation.cpp */
 
 #include "Simulation.h"
 #include "GridStart.h"
+#include "GridRules.h"
 
 Simulation::Simulation(){
   // default constructor
@@ -28,37 +29,42 @@ void Simulation::start(){
       if (tolower(userInput) == 'r'){
         cout << "You selected random!" << endl;
         charMatch = true;
-        cout << "Please enter the desired width of the grid as an integer: " << endl;
+
         int userWidth = -1;
-        cin >> userWidth;
-        cout << "Please enter the desired height of the grid as an integer: " << endl;
+        while (userWidth <= 0 || cin.fail()){
+          cin.clear();
+          cin.ignore(numeric_limits<streamsize>::max(),'\n');
+          cout << "Please enter the desired width of the grid as an integer: " << endl;
+          cin >> userWidth;
+        }
+
         int userHeight = -1;
-        cin >> userHeight;
-        cout << "Please enter the desired density for the grid as a decimal between 0 and 1: " << endl;
+        while (userHeight <= 0 || cin.fail()){
+          cin.clear();
+          cin.ignore(numeric_limits<streamsize>::max(),'\n');
+          cout << "Please enter the desired height of the grid as an integer: " << endl;
+          cin >> userHeight;
+        }
+
         float userDensity = -1;
-        cin >> userDensity;
-        if (userDensity > 0 && userDensity <= 1){
-          cout << "Success!" << endl;
-          cout << "width: " << userWidth << endl;
-          cout << "height: " << userHeight << endl;
-          cout << "density: " << userDensity << endl;
-          gs->GridRandom(userWidth, userHeight, userDensity);
-          gr->SelectMode();
+        while (userDensity <= 0 || userDensity > 1 || cin.fail()){
+          cin.clear();
+          cin.ignore(numeric_limits<streamsize>::max(),'\n');
+          cout << "Please enter the desired density for the grid as a decimal between 0 and 1: " << endl;
+          cin >> userDensity;
         }
-        else {
-          cout << "Sorry you must enter an integer for the width and height, and the density as a decimal between 0 and 1." << endl;
-          cout << "width: " << userWidth << endl;
-          cout << "height: " << userHeight << endl;
-          cout << "density: " << userDensity << endl;
-        }
+
+        gs->GridRandom(userWidth, userHeight, userDensity);
+        gr->SelectMode();
       }
       else if (tolower(userInput) == 'f'){
         cout << "You selected file input!" << endl;
         charMatch = true;
 
-        cout << "Please enter the name of the file you would like to use: " << endl;
         string userFile;
+        cout << "Please enter the name of the file you would like to use: " << endl;
         cin >> userFile;
+
 
         gs->GridFile(userFile);
         gr->SelectMode();

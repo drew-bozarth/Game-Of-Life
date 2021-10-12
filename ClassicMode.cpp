@@ -8,3 +8,7 @@ ClassicMode::ClassicMode(){
 ClassicMode::~ClassicMode(){
   // destructor
 }
+
+void ClassicMode::runClassicSimulation(){
+  cout << "Running Classic Mode Simulation" << endl;
+}

@@ -8,3 +8,7 @@ DoughnutMode::DoughnutMode(){
 DoughnutMode::~DoughnutMode(){
   // destructor
 }
+
+void DoughnutMode::runDoughnutSimulation(){
+  cout << "Running Doughnut Mode Simulation" << endl;
+}

@@ -8,3 +8,7 @@ MirrorMode::MirrorMode(){
 MirrorMode::~MirrorMode(){
   // destructor
 }
+
+void MirrorMode::runMirrorSimulation(){
+  cout << "Running Mirror Mode Simulation" << endl;
+}

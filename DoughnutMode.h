@@ -11,6 +11,7 @@ class DoughnutMode{
 public:
   DoughnutMode();
   ~DoughnutMode();
+  void runDoughnutSimulation();
 };
 
 #endif
