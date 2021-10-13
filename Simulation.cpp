@@ -5,7 +5,6 @@ CPSC 350-02
 Assignment 3 - Simulation.cpp */
 
 #include "Simulation.h"
-#include "GameStart.h"
 #include "ClassicMode.h"
 #include "DoughnutMode.h"
 #include "MirrorMode.h"
@@ -21,7 +20,6 @@ Simulation::~Simulation(){
 }
 
 void Simulation::start(){
-  GameStart *game = new GameStart();
   try{
     bool charMatch = false;
     while (!charMatch){
@@ -57,7 +55,7 @@ void Simulation::start(){
           cin >> userDensity;
         }
 
-        game->GridRandom(userWidth, userHeight, userDensity);
+
         int mode = SelectMode();
         if (mode == 1){
           ClassicMode *cm = new ClassicMode(userWidth, userHeight, userDensity);
@@ -87,7 +85,6 @@ void Simulation::start(){
         cin >> userFile;
 
 
-        game->GridFile(userFile);
         int mode = SelectMode();
         if (mode == 1){
           ClassicMode *cm = new ClassicMode(userFile);
@@ -109,7 +106,6 @@ void Simulation::start(){
         }
       }
     }
-    delete game;
   }
 
   catch(runtime_error &excpt){
