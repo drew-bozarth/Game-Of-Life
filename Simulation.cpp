@@ -58,7 +58,25 @@ void Simulation::start(){
         }
 
         game->GridRandom(userWidth, userHeight, userDensity);
-        SelectMode();
+        int mode = SelectMode();
+        if (mode == 1){
+          ClassicMode *cm = new ClassicMode(userWidth, userHeight, userDensity);
+          cm->runClassicSimulation();
+
+          delete cm;
+        }
+        else if (mode == 2){
+          DoughnutMode *dm = new DoughnutMode(userWidth, userHeight, userDensity);
+          dm->runDoughnutSimulation();
+
+          delete dm;
+        }
+        else if (mode == 3){
+          MirrorMode *mm = new MirrorMode(userWidth, userHeight, userDensity);
+          mm->runMirrorSimulation();
+
+          delete mm;
+        }
       }
       else if (tolower(userInput) == 'f'){
         cout << "You selected file input!" << endl;
@@ -70,7 +88,25 @@ void Simulation::start(){
 
 
         game->GridFile(userFile);
-        SelectMode();
+        int mode = SelectMode();
+        if (mode == 1){
+          ClassicMode *cm = new ClassicMode(userFile);
+          cm->runClassicSimulation();
+
+          delete cm;
+        }
+        else if (mode == 2){
+          DoughnutMode *dm = new DoughnutMode(userFile);
+          dm->runDoughnutSimulation();
+
+          delete dm;
+        }
+        else if (mode == 3){
+          MirrorMode *mm = new MirrorMode(userFile);
+          mm->runMirrorSimulation();
+
+          delete mm;
+        }
       }
     }
     delete game;
@@ -81,8 +117,7 @@ void Simulation::start(){
   }
 }
 
-void Simulation::SelectMode(){
-  GameStart *game = new GameStart();
+int Simulation::SelectMode(){
   while (modeSelection <= 0 || modeSelection > 3 || cin.fail()){
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(),'\n');
@@ -91,27 +126,5 @@ void Simulation::SelectMode(){
     cin >> modeSelection;
   }
 
-  if (modeSelection == 1){
-    ClassicMode *cm = new ClassicMode();
-    cm->runClassicSimulation();
-
-    delete cm;
-  }
-  else if (modeSelection == 2){
-    DoughnutMode *dm = new DoughnutMode();
-    dm->runDoughnutSimulation();
-
-    delete dm;
-  }
-  else if (modeSelection == 3){
-    MirrorMode *mm = new MirrorMode();
-    mm->runMirrorSimulation();
-
-    delete mm;
-  }
-  else {
-    cout << "Sorry, you must enter a number corresponding to the mode you would like to run." << endl;
-  }
-
-  delete game;
+  return modeSelection;
 }
