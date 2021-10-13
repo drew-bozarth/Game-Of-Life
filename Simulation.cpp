@@ -10,6 +10,7 @@ Assignment 3 - Simulation.cpp */
 #include "DoughnutMode.h"
 #include "MirrorMode.h"
 
+
 Simulation::Simulation(){
   // default constructor
   modeSelection = -1;
@@ -20,6 +21,7 @@ Simulation::~Simulation(){
 }
 
 void Simulation::start(){
+  GameStart *game = new GameStart();
   try{
     bool charMatch = false;
     while (!charMatch){
@@ -55,7 +57,7 @@ void Simulation::start(){
           cin >> userDensity;
         }
 
-        //gs->GridRandom(userWidth, userHeight, userDensity);
+        game->GridRandom(userWidth, userHeight, userDensity);
         SelectMode();
       }
       else if (tolower(userInput) == 'f'){
@@ -67,11 +69,11 @@ void Simulation::start(){
         cin >> userFile;
 
 
-        //gs->GridFile(userFile);
+        game->GridFile(userFile);
         SelectMode();
       }
     }
-    //delete gs;
+    delete game;
   }
 
   catch(runtime_error &excpt){
@@ -80,6 +82,7 @@ void Simulation::start(){
 }
 
 void Simulation::SelectMode(){
+  GameStart *game = new GameStart();
   while (modeSelection <= 0 || modeSelection > 3 || cin.fail()){
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(),'\n');
@@ -90,7 +93,7 @@ void Simulation::SelectMode(){
 
   if (modeSelection == 1){
     ClassicMode *cm = new ClassicMode();
-    cm->runClassicSimulation();
+    cm->runClassicSimulation(game->grid);
 
     delete cm;
   }
@@ -109,4 +112,6 @@ void Simulation::SelectMode(){
   else {
     cout << "Sorry, you must enter a number corresponding to the mode you would like to run." << endl;
   }
+
+  delete game;
 }

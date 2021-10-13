@@ -1,5 +1,4 @@
 #include "ClassicMode.h"
-#include "GameStart.h"
 
 ClassicMode::ClassicMode(){
   // default constructor
@@ -9,6 +8,6 @@ ClassicMode::~ClassicMode(){
   // destructor
 }
 
-void ClassicMode::runClassicSimulation(){
+void ClassicMode::runClassicSimulation(char** grid){
   cout << "Running Classic Mode Simulation" << endl;
 }

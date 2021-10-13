@@ -11,7 +11,7 @@ class ClassicMode{
 public:
   ClassicMode();
   ~ClassicMode();
-  void runClassicSimulation();
+  void runClassicSimulation(char** grid);
 };
 
 #endif
