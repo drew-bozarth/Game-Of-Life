@@ -165,3 +165,18 @@ bool GameStart::isDead(int x, int y){
     return true;
   }
 }
+
+char GameStart::nextGeneration(char current, int neighbors){
+  if (neighbors <= 1){
+    return '-';
+  }
+  else if (neighbors == 2){
+    return current;
+  }
+  else if (neighbors == 3){
+    return 'X';
+  }
+  else if (neighbors >= 4){
+    return '-';
+  }
+}

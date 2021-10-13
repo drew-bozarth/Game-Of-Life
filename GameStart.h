@@ -22,6 +22,7 @@ public:
   void extendGrid();
   bool isAlive(int x, int y);
   bool isDead(int x, int y);
+  char nextGeneration(char current, int neighbors);
   char** grid;
   char** gridExtend;
 private:
