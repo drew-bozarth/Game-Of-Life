@@ -59,8 +59,9 @@ void GameStart::GridRandom(int w, int h, float d){
   };
 }
 
-void GameStart::GridFile(string inputFile){
-  ifstream input {inputFile};
+void GameStart::GridFile(string inputFilePath){
+  ifstream input;
+  input.open(inputFilePath.c_str());
   if (input.is_open()){
    char current;
    int row = 0;

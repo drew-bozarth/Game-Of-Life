@@ -7,6 +7,7 @@
 #include <random>
 #include <cstdlib>
 #include <time.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -16,7 +17,7 @@ public:
   GameStart(int w,int h);
   ~GameStart();
   void GridRandom(int w, int h, float d);
-  void GridFile(string inputFile);
+  void GridFile(string inputFilePath);
   int checkNeighbors(char** grid, int x, int y);
   char** grid;
 private:
