@@ -20,6 +20,8 @@ public:
   void GridFile(string inputFilePath);
   int checkNeighbors(char** grid, int x, int y);
   void extendGrid();
+  bool isAlive(int x, int y);
+  bool isDead(int x, int y);
   char** grid;
   char** gridExtend;
 private:

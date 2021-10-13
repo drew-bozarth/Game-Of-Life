@@ -147,3 +147,21 @@ void GameStart::extendGrid(){
   for(int i = 0; i < height+1; i++)
     gridExtend[i] = new char[width+1];
 }
+
+bool GameStart::isAlive(int x, int y){
+  if (grid[x][y] == 'X'){
+    return true;
+  }
+  else if (grid[x][y] == '-'){
+    return false;
+  }
+}
+
+bool GameStart::isDead(int x, int y){
+  if (grid[x][y] == 'X'){
+    return false;
+  }
+  else if (grid[x][y] == '-'){
+    return true;
+  }
+}
