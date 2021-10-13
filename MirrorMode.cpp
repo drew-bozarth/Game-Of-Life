@@ -1,5 +1,5 @@
 #include "MirrorMode.h"
-#include "GridStart.h"
+#include "GameStart.h"
 
 MirrorMode::MirrorMode(){
   // default constructor

@@ -1,5 +1,5 @@
 #include "GridRules.h"
-#include "GridStart.h"
+#include "GameStart.h"
 #include "ClassicMode.h"
 #include "DoughnutMode.h"
 #include "MirrorMode.h"

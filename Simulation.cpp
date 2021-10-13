@@ -5,7 +5,7 @@ CPSC 350-02
 Assignment 3 - Simulation.cpp */
 
 #include "Simulation.h"
-#include "GridStart.h"
+#include "GameStart.h"
 #include "GridRules.h"
 
 Simulation::Simulation(){
@@ -17,7 +17,7 @@ Simulation::~Simulation(){
 }
 
 void Simulation::start(){
-  GridStart *gs = new GridStart();
+  //GridStart *gs = new GridStart();
   GridRules *gr = new GridRules();
   try{
     bool charMatch = false;
@@ -54,7 +54,7 @@ void Simulation::start(){
           cin >> userDensity;
         }
 
-        gs->GridRandom(userWidth, userHeight, userDensity);
+        //gs->GridRandom(userWidth, userHeight, userDensity);
         gr->SelectMode();
       }
       else if (tolower(userInput) == 'f'){
@@ -66,11 +66,11 @@ void Simulation::start(){
         cin >> userFile;
 
 
-        gs->GridFile(userFile);
+        //gs->GridFile(userFile);
         gr->SelectMode();
       }
     }
-    delete gs;
+    //delete gs;
     delete gr;
   }
 
