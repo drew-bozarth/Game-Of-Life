@@ -19,6 +19,9 @@ public:
   Simulation();
   ~Simulation();
   void start();
+  void SelectMode();
+private:
+  int modeSelection;
 };
 
 #endif
