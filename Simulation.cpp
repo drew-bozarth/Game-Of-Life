@@ -59,19 +59,19 @@ void Simulation::start(){
         int mode = SelectMode();
         if (mode == 1){
           ClassicMode *cm = new ClassicMode(userWidth, userHeight, userDensity);
-          cm->runClassicSimulation();
+          cm->runClassicSimulation('r');
 
           delete cm;
         }
         else if (mode == 2){
           DoughnutMode *dm = new DoughnutMode(userWidth, userHeight, userDensity);
-          dm->runDoughnutSimulation();
+          dm->runDoughnutSimulation('r');
 
           delete dm;
         }
         else if (mode == 3){
           MirrorMode *mm = new MirrorMode(userWidth, userHeight, userDensity);
-          mm->runMirrorSimulation();
+          mm->runMirrorSimulation('r');
 
           delete mm;
         }
@@ -88,19 +88,19 @@ void Simulation::start(){
         int mode = SelectMode();
         if (mode == 1){
           ClassicMode *cm = new ClassicMode(userFile);
-          cm->runClassicSimulation();
+          cm->runClassicSimulation('f');
 
           delete cm;
         }
         else if (mode == 2){
           DoughnutMode *dm = new DoughnutMode(userFile);
-          dm->runDoughnutSimulation();
+          dm->runDoughnutSimulation('f');
 
           delete dm;
         }
         else if (mode == 3){
           MirrorMode *mm = new MirrorMode(userFile);
-          mm->runMirrorSimulation();
+          mm->runMirrorSimulation('f');
 
           delete mm;
         }

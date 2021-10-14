@@ -13,7 +13,7 @@ public:
   MirrorMode(int width, int height, float density);
   MirrorMode(string filePath);
   ~MirrorMode();
-  void runMirrorSimulation();
+  void runMirrorSimulation(char selection);
 };
 
 #endif
