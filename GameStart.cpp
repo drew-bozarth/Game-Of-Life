@@ -188,3 +188,7 @@ char GameStart::nextGeneration(char current, int neighbors){
     return '-';
   }
 }
+
+string GameStart::getFilePath(){
+  return inputFilePath;
+}

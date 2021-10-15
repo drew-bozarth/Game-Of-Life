@@ -34,7 +34,7 @@ void ClassicMode::runClassicSimulation(char selection){
   cout << selection << " = selection" << endl;
   if (selection == 'f'){
     cout << "in if statement" << endl;
-    game->GridFile("input.txt");//this has errors (game->inputFilePath)
+    game->GridFile(game->getFilePath());//this has errors (game->inputFilePath)
   }
   else if (selection == 'r'){
     game->GridRandom(w, h, game->density);
@@ -126,8 +126,8 @@ void ClassicMode::runClassicSimulation(char selection){
     }
   }
 
-delete game;
-};
+  delete game;
+}
 
 void ClassicMode::printGrid(){
 

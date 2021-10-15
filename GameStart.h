@@ -22,6 +22,7 @@ public:
   bool isAlive(int x, int y);
   bool isDead(int x, int y);
   char nextGeneration(char current, int neighbors);
+  string getFilePath();
   char** grid;
   char** gridExtend;
   int height;
