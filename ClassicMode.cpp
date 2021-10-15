@@ -129,9 +129,6 @@ void ClassicMode::runClassicSimulation(char selection){
   delete game;
 }
 
-void ClassicMode::printGrid(){
-
-}
 
 
 //https://www.journaldev.com/41740/system-pause-command-c-plus-plus
