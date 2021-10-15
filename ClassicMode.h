@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -14,6 +15,7 @@ public:
   ClassicMode(string filePath);
   ~ClassicMode();
   void runClassicSimulation(char selection);
+  void printGrid();
 };
 
 #endif

@@ -11,6 +11,7 @@ Assignment 3 - Simulation.h */
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <limits>
 
 using namespace std;
 

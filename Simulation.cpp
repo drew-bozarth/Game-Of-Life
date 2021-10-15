@@ -88,6 +88,7 @@ void Simulation::start(){
         int mode = SelectMode();
         if (mode == 1){
           ClassicMode *cm = new ClassicMode(userFile);
+          cout << "about to run classic mode" << endl;
           cm->runClassicSimulation('f');
 
           delete cm;

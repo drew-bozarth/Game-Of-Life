@@ -61,12 +61,26 @@ void DoughnutMode::runDoughnutSimulation(char selection){
   for (int i = 0; i < h; ++i){
     game->gridExtend[i][0] = game->grid[i][w-1];
     game->gridExtend[i][w] = game->grid[i][0];
-  };
-  for (int j = 0; j < w; ++j){
-    for (int k = 0; k < h; ++j){
-      current = game->grid[j][k];
-        neighbors = game->checkNeighbors(game->gridExtend,j,k);
-        current = game->nextGeneration(current,neighbors);
-        game->grid[j][k] = current;
-    }};
+  }
+
+  //this creates a new generation
+  bool simulationGood = true;
+  int generationCount = 0;
+  while (simulationGood){
+
+
+
+
+    for (int j = 0; j < w; ++j){
+      for (int k = 0; k < h; ++j){
+        current = game->grid[j][k];
+          neighbors = game->checkNeighbors(game->gridExtend,j,k);
+          current = game->nextGeneration(current,neighbors);
+          game->grid[j][k] = current;
+      }
+    }
+  }
+
+
+
 };
