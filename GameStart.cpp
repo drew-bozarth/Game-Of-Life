@@ -6,9 +6,9 @@ GameStart::GameStart(){
   grid = new char*[height];
   for(int i = 0; i < height; i++)
     grid[i] = new char[width];
-  gridExtend = new char*[height+1];
-  for(int i = 0; i < height+1; i++){
-    gridExtend[i] = new char[width+1];}
+  gridExtend = new char*[height+2];
+  for(int i = 0; i < height+2; i++){
+    gridExtend[i] = new char[width+2];}
 }
 // GameStart::GameStart(int w, int h){
 //   width = w;
@@ -23,7 +23,7 @@ GameStart::GameStart(){
 GameStart::~GameStart(){
   for(int i = 0; i < height; i++)
       delete[] grid[i];
-  for(int i = 0; i < height+1; i++)
+  for(int i = 0; i < height+2; i++)
       delete[] gridExtend[i];
   delete[] grid;
   delete[] gridExtend;
@@ -50,16 +50,16 @@ void GameStart::GridRandom(int w, int h, float d){
       isFull = false;
     }
     if (isFull){
-      cout << 'X';
+      // cout << 'X';
       grid[k][i] = 'X';
     } else {
-      cout << '-';
+      // cout << '-';
       grid[k][i] = '-';
     }
   }
-  cout << endl;
+  // cout << endl;
 }
-  cout << grid[0][0] << endl;
+  // cout << grid[0][0] << endl;
   for (int i = 0; i < h; ++i){
     for (int j = 0; j < w; ++j){
       cout << " [" << grid[j][i] << "] ";}
@@ -78,13 +78,15 @@ void GameStart::GridFile(string inputFilePath){
    int h;
    getline(input,str);
    h = stoi(str);
+   height = h;
    cout << h << endl;
    getline(input,str);
    w = stoi(str);
+   width = w;
    cout << w << endl;
    grid[w][h];
    while(getline(input,str)){
-     cout << "got line" << endl;
+     // cout << "got line" << endl;
        // cout << str.size() << endl;
     for (int i = 0; i < str.size(); ++i){
          current = str[i];

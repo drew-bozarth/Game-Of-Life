@@ -14,6 +14,11 @@ public:
   DoughnutMode(string filePath);
   ~DoughnutMode();
   void runDoughnutSimulation(char selection);
+private:
+  int width;
+  int height;
+  float density;
+  string inputFilePath;
 };
 
 #endif

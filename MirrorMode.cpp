@@ -3,25 +3,24 @@
 
 MirrorMode::MirrorMode(){
   // default constructor
-  GameStart *game = new GameStart();
-  game->width = 0;
-  game->height = 0;
-  game->density = 0;
-  game->inputFilePath = "";
+  width = 0;
+  height = 0;
+  density = 0;
+  inputFilePath = "";
 }
 
 MirrorMode::MirrorMode(int w, int h, float d){
-  GameStart *game = new GameStart();
+  // GameStart *game = new GameStart();
   // game->GridRandom(w,h,d);
-  game->width = w;
-  game->height = h;
-  game->density = d;
+  width = w;
+  height = h;
+  density = d;
 }
 
 MirrorMode::MirrorMode(string filePath){
-  GameStart *game = new GameStart;
+  // GameStart *game = new GameStart;
   // game->GridFile(filePath);
-  game->inputFilePath = filePath;
+  inputFilePath = filePath;
 }
 
 MirrorMode::~MirrorMode(){
@@ -30,35 +29,51 @@ MirrorMode::~MirrorMode(){
 
 void MirrorMode::runMirrorSimulation(char selection){
   cout << "Running Mirror Mode Simulation" << endl;
-  GameStart *game;
-  int h = game->height;
-  int w = game->width;
-  if (selection = 's'){
-  game->GridFile(game->inputFilePath);
-} else if (selection = 'r'){
-  game->GridRandom(w, h, game->density);
-};
+  GameStart *game = new GameStart();
+  int h = height;
+  int w = width;
+  if (selection == 'f'){
+    cout << "in if statement" << endl;
+  game->GridFile(inputFilePath);
+  w = game->width;
+  // cout<< "width: " << w << endl;
+  h = game->height;
+  // cout << "height: " << h << endl;
+} else if (selection == 'r'){
+  game->GridRandom(width, height, density);
+
+}
+// cout << "height: " << h << endl;
+// cout<< "width: " << w << endl;
   int neighbors = 0;
   char current;
   for (int j = 0; j < h; ++j){
-    for (int k = 0; k < w; ++j){
-        game->gridExtend[j+1][k+1] = game->grid[j][k];
+    for (int k = 0; k < w; ++k){
+        game->gridExtend[k+1][j+1] = game->grid[k][j];
+        // cout << "j-k" << j << "-" << k;
       }
     };
   game->gridExtend[0][0] = game->grid[0][0];
-  game->gridExtend[h][w] = game->grid[h-1][w-1];
-  game->gridExtend[0][w] = game->grid[0][w-1];
-  game->gridExtend[h][0] = game->grid[h-1][0];
+  game->gridExtend[w+1][h+1] = game->grid[w-1][h-1];
+  game->gridExtend[0][h+1] = game->grid[0][h-1];
+  game->gridExtend[w+1][0] = game->grid[w-1][0];
 
-  for (int i = 0; i < w; ++i){
-    game->gridExtend[0][i] = game->grid[0][i];
-    game->gridExtend[h][i] = game->grid[h-1][i];
+
+  for (int i = 1; i < w+1; ++i){
+    game->gridExtend[i][0] = game->grid[i-1][0];
+    game->gridExtend[i][h+1] = game->grid[i-1][h-1];
   };
-  for (int i = 0; i < h; ++i){
-    game->gridExtend[i][0] = game->grid[i][0];
-    game->gridExtend[i][w] = game->grid[i][w-1] ;
+  for (int i = 1; i < h+1; ++i){
+    game->gridExtend[0][i] = game->grid[0][i-1];
+    game->gridExtend[w+1][i] = game->grid[w-1][i-1] ;
   };
 
+  for (int j = 0; j < h+2; ++j){
+    for (int k = 0; k < w+2; ++k){
+        cout << " [" << game->gridExtend[k][j] << "] ";
+      }
+      cout << endl;
+    }
 
 
   bool simulationEmpty = false;

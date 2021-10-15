@@ -14,6 +14,11 @@ public:
   MirrorMode(string filePath);
   ~MirrorMode();
   void runMirrorSimulation(char selection);
+private:
+  int width;
+  int height;
+  float density;
+  string inputFilePath;
 };
 
 #endif

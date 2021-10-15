@@ -3,23 +3,23 @@
 
 ClassicMode::ClassicMode(){
   // default constructor
-  GameStart *game = new GameStart();
-  game->width = 0;
-  game->height = 0;
-  game->density = 0;
-  game->inputFilePath = "";
+  // GameStart *game = new GameStart();
+  int width = 0;
+  int height = 0;
+  int density = 0;
+  string inputFilePath = "";
 }
 ClassicMode::ClassicMode(int w, int h, float d){
-  GameStart *game = new GameStart();
+  // GameStart *game = new GameStart();
   // game->GridRandom(w,h,d);
-  game->width = w;
-  game->height = h;
-  game->density = d;
+  width = w;
+  height = h;
+  density = d;
 }
 ClassicMode::ClassicMode(string filePath){
-  GameStart *game = new GameStart;
+  // GameStart *game = new GameStart;
   // game->GridFile(filePath);
-  game->inputFilePath = filePath;
+  inputFilePath = filePath;
 }
 
 ClassicMode::~ClassicMode(){
@@ -28,25 +28,42 @@ ClassicMode::~ClassicMode(){
 
 void ClassicMode::runClassicSimulation(char selection){
   cout << "in runClassicSimulation" << endl;
-  GameStart *game;
-  int h = game->height;
-  int w = game->width;
+  GameStart *game = new GameStart();
+  int h = height;
+  int w = width;
   cout << selection << " = selection" << endl;
   if (selection == 'f'){
     cout << "in if statement" << endl;
-    game->GridFile(game->getFilePath());//this has errors (game->inputFilePath)
+    game->GridFile(inputFilePath);//this has errors (game->inputFilePath)
+    w = game->width;
+    h = game->height;
   }
   else if (selection == 'r'){
-    game->GridRandom(w, h, game->density);
+  game->GridRandom(width, height, density);
+
   }
   int neighbors = 0;
   char current;
+  // cout << h << " " << w << endl;
   cout << "Running Classic Mode Simulation" << endl;
   for (int j = 0; j < h; ++j){
     for (int k = 0; k < w; ++k){
-      game->gridExtend[j+1][k+1] = game->grid[j][k];
-    }
-  }
+      game->gridExtend[k+1][j+1] = game->grid[k][j];
+    }}
+    for (int i = 0; i < w+2; ++i){
+      game->gridExtend[i][0] = '-';
+      game->gridExtend[i][h+1] = '-';
+    };
+    for (int i = 0; i < h+2; ++i){
+      game->gridExtend[0][i] = '-';
+      game->gridExtend[w+1][i] = '-';
+    };
+  // for (int j = 0; j < h+2; ++j){
+  //   for (int k = 0; k < w+2; ++k){
+  //       cout << " [" << game->gridExtend[k][j] << "] ";
+  //     }
+  //     cout << endl;
+  //   }
 
 
   bool simulationEmpty = false;
