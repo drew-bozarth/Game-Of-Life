@@ -15,6 +15,11 @@ public:
   ClassicMode(string filePath);
   ~ClassicMode();
   void runClassicSimulation(char selection);
+private:
+  int width;
+  int height;
+  float density;
+  string inputFilePath;
 };
 
 #endif
