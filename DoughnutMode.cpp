@@ -92,7 +92,7 @@ cout << "height: " << h << " Width: " << w << endl;
       //using system("pause")
       cout << "\n\nGENERATION " << generationCount << "\n\n";
       for (int j = 0; j < w; ++j){
-        for (int k = 0; k < h; ++j){
+        for (int k = 0; k < h; ++k){
           cout << "[" << game->grid[j][k] << "]";
         }
         cout << "\n";
@@ -105,7 +105,7 @@ cout << "height: " << h << " Width: " << w << endl;
       //pressing "enter" to continue
       cout << "\n\nGENERATION " << generationCount << "\n\n";
       for (int j = 0; j < w; ++j){
-        for (int k = 0; k < h; ++j){
+        for (int k = 0; k < h; ++k){
           cout << "[" << game->grid[j][k] << "]";
         }
         cout << "\n";
@@ -125,7 +125,7 @@ cout << "height: " << h << " Width: " << w << endl;
       if(outputFile.is_open()){
         outputFile << "\nGENERATION " << generationCount << "\n\n";
         for (int j = 0; j < w; ++j){
-          for (int k = 0; k < h; ++j){
+          for (int k = 0; k < h; ++k){
             outputFile << "[" << game->grid[j][k] << "]";
           }
           outputFile << "\n";
@@ -138,7 +138,7 @@ cout << "height: " << h << " Width: " << w << endl;
 
     //after output method, we compute the next generation
     for (int j = 0; j < w; ++j){
-      for (int k = 0; k < h; ++j){
+      for (int k = 0; k < h; ++k){
         current = game->grid[j][k];
           neighbors = game->checkNeighbors(game->gridExtend,j,k);
           current = game->nextGeneration(current,neighbors);

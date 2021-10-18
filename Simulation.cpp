@@ -81,14 +81,13 @@ void Simulation::start(){
         charMatch = true;
 
         string userFile;
-        cout << "Please enter the name of the file you would like to use: " << endl;
+        cout << "Please enter the file path for the file you would like to use: " << endl;
         cin >> userFile;
 
 
         int mode = SelectMode();
         if (mode == 1){
           ClassicMode *cm = new ClassicMode(userFile);
-          cout << "about to run classic mode" << endl;
           cm->runClassicSimulation('f');
 
           delete cm;

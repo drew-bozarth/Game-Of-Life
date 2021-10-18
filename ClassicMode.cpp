@@ -67,6 +67,8 @@ void ClassicMode::runClassicSimulation(char selection){
 
 
   bool simulationEmpty = false;
+  //GameStart *currentGen;
+  //GameStart *prevGen;
   int generationCount = 0;
   int outputSelection = -1;
   while (outputSelection <= 0 || cin.fail()){
@@ -75,17 +77,20 @@ void ClassicMode::runClassicSimulation(char selection){
     cout << "Please enter the number for how you would like to view the Simulation:" << endl;
     cout << "1. Brief pause between generations\n2. Press 'Enter' key to display next generation\n3. Output to a file" << endl;
     cin >> outputSelection;
+    cout << "selection is : " << outputSelection << endl;
   }
+  cout << "about to start while loop. simulation empty - " << simulationEmpty << endl;
   while (!simulationEmpty){
     if (outputSelection == 1) {
       //using system("pause")
       cout << "\n\nGENERATION " << generationCount << "\n\n";
       for (int j = 0; j < w; ++j){
-        for (int k = 0; k < h; ++j){
+        for (int k = 0; k < h; ++k){
           cout << "[" << game->grid[j][k] << "]";
         }
-        cout << "\n";
+        cout << endl;
       }
+      cout << "end of print" << endl;
 
       system("pause"); //press any key to continue...
 
@@ -94,7 +99,7 @@ void ClassicMode::runClassicSimulation(char selection){
       //pressing "enter" to continue
       cout << "\n\nGENERATION " << generationCount << "\n\n";
       for (int j = 0; j < w; ++j){
-        for (int k = 0; k < h; ++j){
+        for (int k = 0; k < h; ++k){
           cout << "[" << game->grid[j][k] << "]";
         }
         cout << "\n";
@@ -114,7 +119,7 @@ void ClassicMode::runClassicSimulation(char selection){
       if(outputFile.is_open()){
         outputFile << "\nGENERATION " << generationCount << "\n\n";
         for (int j = 0; j < w; ++j){
-          for (int k = 0; k < h; ++j){
+          for (int k = 0; k < h; ++k){
             outputFile << "[" << game->grid[j][k] << "]";
           }
           outputFile << "\n";
@@ -124,17 +129,24 @@ void ClassicMode::runClassicSimulation(char selection){
         throw runtime_error("Could not open output file!!");
       }
     }
-
+    cout << "about to compute next generation" << endl;
     //after output method, we compute the next generation
-    for (int j = 0; j < w; ++j){
-      for (int k = 0; k < h; ++j){
-        current = game->grid[j][k];
-          neighbors = game->checkNeighbors(game->gridExtend,j,k);
-          current = game->nextGeneration(current,neighbors);
-          game->grid[j][k] = current;
+    for (int m = 0; m < w; ++m){
+      for (int n = 0; n < h; ++n){
+        cout << "1" << endl;
+        current = game->grid[m][n];
+        cout << "2" << endl;
+        //neighbors = game->checkNeighbors(game->gridExtend,m,n); //segmentation here
+        cout << "3" << endl;
+        current = game->nextGeneration(current,neighbors);
+        cout << "4" << endl;
+        game->grid[m][n] = current;
+        cout << "5" << endl;
       }
     }
+    cout << "gen count before: " << generationCount << endl;
     ++generationCount;
+    cout << "gen count after: " << generationCount << endl;
 
     //check if loop needs to end & set simulationEmpty to true & close file
     if (2 == 1){
