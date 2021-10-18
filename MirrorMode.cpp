@@ -3,9 +3,17 @@
 dbozarth@chapman.edu | tgooding@chapman.edu
 CPSC 350-02
 Assignment 3 - MirrorMode.cpp */
+
+//these statements include the user defined files MirrorMode.h" and "GameStart.h" into this file
 #include "MirrorMode.h"
 #include "GameStart.h"
 
+/*
+Function: MirrorMode
+Return: none
+Parameters: none (default constructor)
+Exceptions: none
+*/
 MirrorMode::MirrorMode(){
   // default constructor
   width = 0;
@@ -25,7 +33,12 @@ MirrorMode::MirrorMode(string filePath){
 // overload constructor if the gamestart is a filepath
   inputFilePath = filePath;
 }
-
+/*
+Function: ~MirrorMode
+Return: none
+Parameters: none (default destructor)
+Exceptions: none
+*/
 MirrorMode::~MirrorMode(){
   // destructor
 }

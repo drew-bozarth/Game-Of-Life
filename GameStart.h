@@ -3,9 +3,18 @@
 dbozarth@chapman.edu | tgooding@chapman.edu
 CPSC 350-02
 Assignment 3 - Gamestart.h */
+
+/*
+This is the header file for the GameStart class which is used to set
+up the background of the Game of Life, and is how the grid is created
+and altered for the simulation
+*/
+
+//these are the header guards to prevent the header file from being included multiple times
 #ifndef GAMESTART_H
 #define GAMESTART_H
 
+//the are the system defined libraries that are included to be used for this class
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -13,10 +22,17 @@ Assignment 3 - Gamestart.h */
 #include <cstdlib>
 #include <time.h>
 #include <stdio.h>
-
+// standard namespace library in C++
 using namespace std;
 
+/*
+Class: GameStart
+Return: none
+Parameters: none
+Exceptions: none
+*/
 class GameStart{
+//This is declaring the public methods and constructors and variables for the class
 public:
   GameStart();
   ~GameStart();
@@ -26,6 +42,7 @@ public:
   void extendGrid();
   bool isAlive(int x, int y);
   bool isDead(int x, int y);
+  bool simulationEmpty();
   char nextGeneration(char current, int neighbors);
   string getFilePath();
   char** grid;
@@ -37,5 +54,5 @@ public:
 private:
 
 };
-
+//this is the end to the header guard
 #endif

@@ -3,9 +3,17 @@
 dbozarth@chapman.edu | tgooding@chapman.edu
 CPSC 350-02
 Assignment 3 - ClassicMode.cpp */
+
+//these statements include the user defined files "ClassicMode.h and "GameStart.h" into this file
 #include "ClassicMode.h"
 #include "GameStart.h"
 
+/*
+Function: ClassicMode
+Return: none
+Parameters: none (default constructor)
+Exceptions: none
+*/
 ClassicMode::ClassicMode(){
   //defualt constructor seeint certain variable to 0 or null;
   int width = 0;
@@ -23,15 +31,20 @@ ClassicMode::ClassicMode(string filePath){
   // overload constructor if the gamestart is a filepath
   inputFilePath = filePath;
 }
-
+/*
+Function: ~ClassicMode
+Return: none
+Parameters: none (default destructor)
+Exceptions: none
+*/
 ClassicMode::~ClassicMode(){
   // delete game;
 }
 
 void ClassicMode::runClassicSimulation(char selection){
   //taking parameter selection and determining what gamestart we are playing with
-  cout << "in runClassicSimulation" << endl;
   GameStart *game = new GameStart();
+  cout << endl;
   //game start pointer
   int h = height;
   int w = width;
@@ -48,7 +61,7 @@ void ClassicMode::runClassicSimulation(char selection){
   }
   int neighbors = 0;
   char current;
-  cout << "Running Classic Mode Simulation" << endl;
+  cout << endl;
   //writes the established gameboard to an extended version to circumvent index out of bounds when checking neighbors
   for (int j = 0; j < h; ++j){
     for (int k = 0; k < w; ++k){
@@ -76,9 +89,8 @@ void ClassicMode::runClassicSimulation(char selection){
     cout << "Please enter the number for how you would like to view the Simulation:" << endl;
     cout << "1. Brief pause between generations\n2. Press 'Enter' key to display next generation\n3. Output to a file" << endl;
     cin >> outputSelection;
-    cout << "selection is : " << outputSelection << endl;
   }
-  cout << "about to start while loop. simulation empty - " << simulationEmpty << endl;
+
   while (!simulationEmpty){
     if (outputSelection == 1) {
       cout << "\n\nGENERATION " << generationCount << "\n\n";
@@ -88,7 +100,6 @@ void ClassicMode::runClassicSimulation(char selection){
         }
         cout << endl;
       }
-      cout << "end of print" << endl;
 
       system("pause"); //press any key to continue...
 
@@ -131,23 +142,16 @@ void ClassicMode::runClassicSimulation(char selection){
     //after output method, we compute the next generation
     for (int m = 0; m < w; ++m){
       for (int n = 0; n < h; ++n){
-        cout << "1" << endl;
         current = game->grid[m][n];
-        cout << "2" << endl;
-        //neighbors = game->checkNeighbors(game->gridExtend,m,n); //segmentation here
-        cout << "3" << endl;
+        neighbors = game->checkNeighbors(game->gridExtend,m,n); //segmentation here
         current = game->nextGeneration(current,neighbors);
-        cout << "4" << endl;
         game->grid[m][n] = current;
-        cout << "5" << endl;
       }
     }
-    cout << "gen count before: " << generationCount << endl;
     ++generationCount;
-    cout << "gen count after: " << generationCount << endl;
 
     //check if loop needs to end & set simulationEmpty to true & close file
-    if (2 == 1){
+    if (game->simulationEmpty()){
       simulationEmpty = true;
       //outputFile.close(); //this doesn't work bc its out of the scope
     }

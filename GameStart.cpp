@@ -3,8 +3,20 @@
 dbozarth@chapman.edu | tgooding@chapman.edu
 CPSC 350-02
 Assignment 3 - Gamestart.cpp */
+
+/*
+This is the .cpp file for GameStart.
+*/
+
+//this statement includes the user defined file "GameStart.h" into this file
 #include "GameStart.h"
 
+/*
+Function: GameStart
+Return: none
+Parameters: none (default constructor)
+Exceptions: none
+*/
 GameStart::GameStart(){
   //default constructor creating two different arrays of different sizes
   width = 100;
@@ -17,6 +29,12 @@ GameStart::GameStart(){
     gridExtend[i] = new char[width+2];}
 }
 
+/*
+Function: ~GameStart
+Return: none
+Parameters: none (default destructor)
+Exceptions: none
+*/
 GameStart::~GameStart(){
   //destructor deleting the two arrays
   for(int i = 0; i < height; i++)
@@ -26,7 +44,12 @@ GameStart::~GameStart(){
   delete[] grid;
   delete[] gridExtend;
 }
-
+/*
+Function: GridRandom
+Return: void (nothing is returned, the function takes in values from user and sets member variables for the class
+Parameters: int (w, user input for width of grid), int (h, user input for height of grid), float (d, user input for density of the grid)
+Exceptions: none
+*/
 void GameStart::GridRandom(int w, int h, float d){
   //starts a game board with heigh width and density
   width = w;
@@ -62,7 +85,12 @@ void GameStart::GridRandom(int w, int h, float d){
     cout << endl;
   };
 }
-
+/*
+Function: GridFile
+Return: void (nothing is returned, the function takes in a file name and reads the values and sets member variables for the class
+Parameters: string (inputFilePath, the user inputs a string for the file path of the input file)
+Exceptions: none
+*/
 void GameStart::GridFile(string inputFilePath){
   //starts gameboard based on filePath input
   ifstream input;
@@ -119,11 +147,18 @@ void GameStart::GridFile(string inputFilePath){
    cout << "file closed" << endl;
 
 }
-
-int GameStart::checkNeighbors(char** grid, int x, int y){
+/*
+Function: checkNeighbors
+Return: int (number of alive neighbors a cell in the grid has)
+Parameters: char** (the double array passed for the grid), int (x, the x position in the grid), int (y, the y position in the grid)
+Exceptions: none
+*/
+int GameStart::checkNeighbors(char** grid, int xGrid, int yGrid){\
   //function checks neighbors based on array input and placement in grid on x and y axis
-  int LiveNeighbors = 0;
-
+  int LiveNeighbors = 0;\
+  cout << endl;
+  int x = xGrid + 1;
+  int y = yGrid + 1;\
   if (grid[x-1][y-1] != '-')
     ++LiveNeighbors;
        //check top
@@ -150,7 +185,12 @@ int GameStart::checkNeighbors(char** grid, int x, int y){
 
   return LiveNeighbors;
 }
-
+/*
+Function: isAlive
+Return: bool (checks if the cell in the grid is alive)
+Parameters: int (x, x-coordinate in grid), int (y, y-coordinate in grid)
+Exceptions: none
+*/
 bool GameStart::isAlive(int x, int y){
   //checks if a given spot is alive
   if (grid[x][y] == 'X'){
@@ -160,7 +200,12 @@ bool GameStart::isAlive(int x, int y){
     return false;
   }
 }
-
+/*
+Function: isDead
+Return: bool (checks if the cell in the grid is dead)
+Parameters: int (x, x-coordinate in grid), int (y, y-coordinate in grid)
+Exceptions: none
+*/
 bool GameStart::isDead(int x, int y){
   //checks if a given spot is dead
   if (grid[x][y] == 'X'){
@@ -170,7 +215,28 @@ bool GameStart::isDead(int x, int y){
     return true;
   }
 }
-
+/*
+Function: simulationEmpty
+Return: bool (returns true if all the cells in the grid are dead)
+Parameters: none
+Exceptions: none
+*/
+bool GameStart::simulationEmpty(){
+  for (int x = 0; x < width; ++x){
+    for (int y = 0; y < height; ++y){
+      if (grid[x][y] == 'X'){
+        return false;
+      }
+    }
+  }
+  return true;
+}
+/*
+Function: nextGeneration
+Return: char (either 'X' or '-' for an alive or dead cell)
+Parameters: char (current, the current state of the cell), int (neighbors, the amount of neighbors the cell has)
+Exceptions: none
+*/
 char GameStart::nextGeneration(char current, int neighbors){
   //returns the next generation of a value based on the current character and the number of neighbors
   if (neighbors <= 1){
@@ -186,7 +252,12 @@ char GameStart::nextGeneration(char current, int neighbors){
     return '-';
   }
 }
-
+/*
+Function: getFilePath
+Return: string (returns the filePath member variable)
+Parameters: none
+Exceptions: none
+*/
 string GameStart::getFilePath(){
   //returns file path
   return inputFilePath;

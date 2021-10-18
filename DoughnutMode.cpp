@@ -3,9 +3,17 @@
 dbozarth@chapman.edu | tgooding@chapman.edu
 CPSC 350-02
 Assignment 3 - DoughnutMode.cpp */
+
+//these statements include the user defined files "DoughnutMode.h" and "GameStart.h" into this file
 #include "DoughnutMode.h"
 #include "GameStart.h"
 
+/*
+Function: DoughnutMode
+Return: none
+Parameters: none (default constructor)
+Exceptions: none
+*/
 DoughnutMode::DoughnutMode(){
   // default constructor
   width = 0;
@@ -25,7 +33,12 @@ DoughnutMode::DoughnutMode(string filePath){
   // overload constructor if the gamestart is a filepath
   inputFilePath = filePath;
 }
-
+/*
+Function: ~DoughnutMode
+Return: none
+Parameters: none (default destructor)
+Exceptions: none
+*/
 DoughnutMode::~DoughnutMode(){
   // destructor
 }

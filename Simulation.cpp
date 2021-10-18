@@ -4,17 +4,29 @@ dbozarth@chapman.edu | tgooding@chapman.edu
 CPSC 350-02
 Assignment 3 - Simulation.cpp */
 
+//these statements include the user defined files "Simulation.h", "ClassicMode.h", "DoughnutMode.h" and "MirrorMode.h" into this file
 #include "Simulation.h"
 #include "ClassicMode.h"
 #include "DoughnutMode.h"
 #include "MirrorMode.h"
 
-
+/*
+Function: Simulation
+Return: none
+Parameters: none (default constructor)
+Exceptions: none
+*/
 Simulation::Simulation(){
   // default constructor
   modeSelection = -1;
 }
 
+/*
+Function: ~Simulation
+Return: none
+Parameters: none (default destructor)
+Exceptions: none
+*/
 Simulation::~Simulation(){
   // destructor
 }
