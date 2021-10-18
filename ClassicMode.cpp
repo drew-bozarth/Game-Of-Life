@@ -142,10 +142,10 @@ void ClassicMode::runClassicSimulation(char selection){
     //after output method, we compute the next generation
     for (int m = 0; m < w; ++m){
       for (int n = 0; n < h; ++n){
-        current = game->grid[m][n];
-        neighbors = game->checkNeighbors(game->gridExtend,m,n); //segmentation here
-        current = game->nextGeneration(current,neighbors);
-        game->grid[m][n] = current;
+        char currentCell = game->grid[m][n];
+        int neighborCount = game->checkNeighbors(game->gridExtend,m,n); //segmentation here
+        char newCell = game->nextGeneration(currentCell,neighborCount);
+        game->grid[m][n] = newCell;
       }
     }
     ++generationCount;

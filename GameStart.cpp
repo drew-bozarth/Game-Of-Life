@@ -153,12 +153,11 @@ Return: int (number of alive neighbors a cell in the grid has)
 Parameters: char** (the double array passed for the grid), int (x, the x position in the grid), int (y, the y position in the grid)
 Exceptions: none
 */
-int GameStart::checkNeighbors(char** grid, int xGrid, int yGrid){\
+int GameStart::checkNeighbors(char** grid, int xGrid, int yGrid){
   //function checks neighbors based on array input and placement in grid on x and y axis
-  int LiveNeighbors = 0;\
-  cout << endl;
+  int LiveNeighbors = 0;
   int x = xGrid + 1;
-  int y = yGrid + 1;\
+  int y = yGrid + 1;
   if (grid[x-1][y-1] != '-')
     ++LiveNeighbors;
        //check top
