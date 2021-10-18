@@ -59,33 +59,6 @@ void MirrorMode::runMirrorSimulation(char selection){
 }
   int neighbors = 0;
   char current;
-  for (int j = 0; j < h; ++j){
-    for (int k = 0; k < w; ++k){
-        game->gridExtend[k+1][j+1] = game->grid[k][j];
-      }
-    };
-    //writes the corners of the extended grid based on mirror rules
-  game->gridExtend[0][0] = game->grid[0][0];
-  game->gridExtend[w+1][h+1] = game->grid[w-1][h-1];
-  game->gridExtend[0][h+1] = game->grid[0][h-1];
-  game->gridExtend[w+1][0] = game->grid[w-1][0];
-
-// writes the non-corner sides of extened grid based on mirror rules
-  for (int i = 1; i < w+1; ++i){
-    game->gridExtend[i][0] = game->grid[i-1][0];
-    game->gridExtend[i][h+1] = game->grid[i-1][h-1];
-  };
-  for (int i = 1; i < h+1; ++i){
-    game->gridExtend[0][i] = game->grid[0][i-1];
-    game->gridExtend[w+1][i] = game->grid[w-1][i-1] ;
-  };
-  cout << "extended grid" << endl;
-  for (int j = 0; j < h+2; ++j){
-    for (int k = 0; k < w+2; ++k){
-        cout << " [" << game->gridExtend[k][j] << "] ";
-      }
-      cout << endl;
-    }
 
 
   bool simulationEmpty = false;
@@ -100,12 +73,38 @@ void MirrorMode::runMirrorSimulation(char selection){
     cin >> outputSelection;
   }
   while (!simulationEmpty){
+    for (int j = 0; j < h; ++j){
+      for (int k = 0; k < w; ++k){
+          game->gridExtend[k+1][j+1] = game->grid[k][j];
+        }
+      }
+  // writes the non-corner sides of extened grid based on mirror rules
+    for (int i = 0; i < w+1; ++i){
+      game->gridExtend[i+1][0] = game->grid[i][0];
+      game->gridExtend[i+1][h+1] = game->grid[i][h-1];
+    }
+    for (int i = 0; i < h+1; ++i){
+      game->gridExtend[0][i+1] = game->grid[0][i];
+      game->gridExtend[w+1][i+1] = game->grid[w-1][i] ;
+    }
+    //writes the corners of the extended grid based on mirror rules
+  game->gridExtend[0][0] = game->grid[0][0];
+  game->gridExtend[w+1][h+1] = game->grid[w-1][h-1];
+  game->gridExtend[0][h+1] = game->grid[0][h-1];
+  game->gridExtend[w+1][0] = game->grid[w-1][0];
+    // cout << "extended grid" << endl;
+    for (int j = 0; j < h+2; ++j){
+      for (int k = 0; k < w+2; ++k){
+          cout << " [" << game->gridExtend[k][j] << "] ";
+        }
+        cout << endl;
+      }
     if (outputSelection == 1) {
       //using system("pause")
       cout << "\n\nGENERATION " << generationCount << "\n\n";
       for (int j = 0; j < h; ++j){
         for (int k = 0; k < w; ++k){
-          cout << "[" << game->grid[j][k] << "]";
+          cout << "[" << game->grid[k][j] << "]";
         }
         cout << "\n";
       }
@@ -118,7 +117,7 @@ void MirrorMode::runMirrorSimulation(char selection){
       cout << "\n\nGENERATION " << generationCount << "\n\n";
       for (int j = 0; j < h; ++j){
         for (int k = 0; k < w; ++k){
-          cout << "[" << game->grid[j][k] << "]";
+          cout << "[" << game->grid[k][j] << "]";
         }
         cout << "\n";
       }
@@ -138,7 +137,7 @@ void MirrorMode::runMirrorSimulation(char selection){
         outputFile << "\nGENERATION " << generationCount << "\n\n";
         for (int j = 0; j < h; ++j){
           for (int k = 0; k < w; ++k){
-            outputFile << "[" << game->grid[j][k] << "]";
+            outputFile << "[" << game->grid[k][j] << "]";
           }
           outputFile << "\n";
         }

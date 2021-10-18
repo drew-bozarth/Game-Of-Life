@@ -34,6 +34,7 @@ public:
   ClassicMode(string filePath);
   ~ClassicMode();
   void runClassicSimulation(char selection);
+  void WriteExtendedGrid(char** g, char** gE);
   //This is declaring the private variables for the class
 private:
   int width;

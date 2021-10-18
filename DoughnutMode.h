@@ -33,6 +33,7 @@ public:
   DoughnutMode(string filePath);
   ~DoughnutMode();
   void runDoughnutSimulation(char selection);
+  // void WriteExtendedGridDoughnut(char** g, char** gE);
 private:
   //This is declaring the private variables for the class
   int width;

@@ -107,12 +107,12 @@ void GameStart::GridFile(string inputFilePath){
    getline(input,str);
    h = stoi(str);
    height = h;
-   cout << h << endl;
+   // cout << h << endl;
    getline(input,str);
    w = stoi(str);
    //first two lines are the height and width
    width = w;
-   cout << w << endl;
+   // cout << w << endl;
    grid[w][h];
    //restablishing gridsize with heigh and width
    while(getline(input,str)){
@@ -123,16 +123,16 @@ void GameStart::GridFile(string inputFilePath){
          current = str[i];
          if (current == '-'){
            grid[i][row] = current;
-           cout << grid[i][row] << "-";
+           // cout << grid[i][row] << "-";
          } else if (current == 'x' || current == 'X'){
            grid[i][row] = current;
-           cout << grid[i][row];
+           // cout << grid[i][row];
          } else {
            cout << "invalid input" << endl;
          }
        }
-         cout << endl;
-         cout << row << endl;
+         // cout << endl;
+         // cout << row << endl;
        row++;}
          // cout << "readfile" << endl;
          // cout << grid[0][6] << endl;

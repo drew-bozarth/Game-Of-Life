@@ -61,40 +61,25 @@ void DoughnutMode::runDoughnutSimulation(char selection){
 
   int neighbors = 0;
   char current;
-  for (int j = 0; j < h; ++j){
-    for (int k = 0; k < w; ++k){
-      // cout << "writing" << endl;
-        game->gridExtend[k+1][j+1] = game->grid[k][j];
-      }
-    };
-  //writes the corners of the extended grid based on Doughnut rules
-  game->gridExtend[0][0] = game->grid[w-1][h-1];
-  game->gridExtend[w+1][h+1] = game->grid[0][0];
-  game->gridExtend[0][h+1] = game->grid[w-1][0];
-  game->gridExtend[w+1][0] = game->grid[0][h-1];
 
-// writes the non-corner sides of extened grid based on mirror rules
-  for (int i = 1; i < h+1; ++i){
-    game->gridExtend[0][i] = game->grid[w-1][i-1];
-    game->gridExtend[w+1][i] = game->grid[0][i-1];
-  };
-  for (int i = 1; i < w+1; ++i){
-    game->gridExtend[i][0] = game->grid[i-1][h-1];
-    game->gridExtend[i][h+1] = game->grid[i-1][0];
-  }
 //prints gamebaord
-cout << "extended grid" << endl;
-  for (int j = 0; j < h+2; ++j){
-    for (int k = 0; k < w+2; ++k){
-        cout << " [" << game->gridExtend[k][j] << "] ";
-      }
-      cout << endl;
-    }
+// WriteExtendedGridDoughnut(game->grid,game->gridExtend);
+// cout << "extended grid" << endl;
+//   for (int j = 0; j < h+2; ++j){
+//     for (int k = 0; k < w+2; ++k){
+//         cout << " [" << game->gridExtend[k][j] << "] ";
+//       }
+//       cout << endl;
+//     }
 
 
   bool simulationEmpty = false;
   int generationCount = 0;
   int outputSelection = -1;
+  // for (int i = 0; i < h; ++i){
+  //   for (int j = 0; j < w; ++j){
+  //     cout << " [" << game->grid[j][i] << "] ";}
+  //   cout << endl;}
   //after creating the two boards this asks for user input to continue simulation until end or just to print one generation to a file
   while (outputSelection <= 0 || cin.fail()){
     cin.clear();
@@ -104,12 +89,38 @@ cout << "extended grid" << endl;
     cin >> outputSelection;
   }
   while (!simulationEmpty){
+    for (int j = 0; j < h; ++j){
+      for (int k = 0; k < w; ++k){
+        // cout << "writing" << endl;
+          game->gridExtend[k+1][j+1] = game->grid[k][j];
+        }
+      }
+  // writes the non-corner sides of extened grid based on mirror rules
+    for (int i = 0; i < h+1; ++i){
+      game->gridExtend[0][i+1] = game->grid[w-1][i];
+      game->gridExtend[w+1][i+1] = game->grid[0][i];
+    }
+    for (int i = 0; i < w+1; ++i){
+      game->gridExtend[i+1][0] = game->grid[i][h-1];
+      game->gridExtend[i+1][h+1] = game->grid[i][0];
+    }
+    //writes the corners of the extended grid based on Doughnut rules
+    game->gridExtend[0][0] = game->grid[w-1][h-1];
+    game->gridExtend[w+1][h+1] = game->grid[0][0];
+    game->gridExtend[0][h+1] = game->grid[w-1][0];
+    game->gridExtend[w+1][0] = game->grid[0][h-1];
+      // for (int j = 0; j < h+2; ++j){
+      //   for (int k = 0; k < w+2; ++k){
+      //       cout << " [" << game->gridExtend[k][j] << "] ";
+      //     }
+      //     cout << endl;
+      //   }
     if (outputSelection == 1) {
       //using system("pause")
       cout << "\n\nGENERATION " << generationCount << "\n\n";
-      for (int j = 0; j < w; ++j){
-        for (int k = 0; k < h; ++k){
-          cout << "[" << game->grid[j][k] << "]";
+      for (int j = 0; j < h; ++j){
+        for (int k = 0; k < w; ++k){
+          cout << "[" << game->grid[k][j] << "]";
         }
         cout << "\n";
       }
@@ -122,7 +133,7 @@ cout << "extended grid" << endl;
       cout << "\n\nGENERATION " << generationCount << "\n\n";
       for (int j = 0; j < h; ++j){
         for (int k = 0; k < w; ++k){
-          cout << "[" << game->grid[j][k] << "]";
+          cout << "[" << game->grid[k][j] << "]";
         }
         cout << "\n";
       }
@@ -142,7 +153,7 @@ cout << "extended grid" << endl;
         outputFile << "\nGENERATION " << generationCount << "\n\n";
         for (int j = 0; j < h; ++j){
           for (int k = 0; k < w; ++k){
-            outputFile << "[" << game->grid[j][k] << "]";
+            outputFile << "[" << game->grid[k][j] << "]";
           }
           outputFile << "\n";
         }

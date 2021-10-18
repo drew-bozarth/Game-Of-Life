@@ -63,18 +63,11 @@ void ClassicMode::runClassicSimulation(char selection){
   char current;
   cout << endl;
   //writes the established gameboard to an extended version to circumvent index out of bounds when checking neighbors
-  for (int j = 0; j < h; ++j){
-    for (int k = 0; k < w; ++k){
-      game->gridExtend[k+1][j+1] = game->grid[k][j];
-    }}
-    for (int i = 0; i < w+2; ++i){
-      game->gridExtend[i][0] = '-';
-      game->gridExtend[i][h+1] = '-';
-    };
-    for (int i = 0; i < h+2; ++i){
-      game->gridExtend[0][i] = '-';
-      game->gridExtend[w+1][i] = '-';
-    };
+
+// for (int j = 0; j < h+2; ++j){
+//   for (int k = 0; k < w+2; ++k){
+//     cout << "[" << game->gridExtend[k][j] << "]";}
+//     cout << endl;
 
 
   bool simulationEmpty = false;
@@ -92,11 +85,23 @@ void ClassicMode::runClassicSimulation(char selection){
   }
 
   while (!simulationEmpty){
+    for (int j = 0; j < h; ++j){
+      for (int k = 0; k < w; ++k){
+        game->gridExtend[k+1][j+1] = game->grid[k][j];
+      }}
+      for (int i = 0; i < w+2; ++i){
+        game->gridExtend[i][0] = '-';
+        game->gridExtend[i][h+1] = '-';
+      };
+      for (int i = 0; i < h+2; ++i){
+        game->gridExtend[0][i] = '-';
+      game->gridExtend[w+1][i] = '-';
+      };
     if (outputSelection == 1) {
       cout << "\n\nGENERATION " << generationCount << "\n\n";
       for (int j = 0; j < h; ++j){
         for (int k = 0; k < w; ++k){
-          cout << "[" << game->grid[j][k] << "]";
+          cout << "[" << game->grid[k][j] << "]";
         }
         cout << endl;
       }
@@ -146,13 +151,13 @@ void ClassicMode::runClassicSimulation(char selection){
     for (int m = 0; m < w; ++m){
       for (int n = 0; n < h; ++n){
         char currentCell = game->grid[m][n];
-        cout << "current cell = " << currentCell << " | ";
+        // cout << "current cell = " << currentCell << " | ";
         int neighborCount = game->checkNeighbors(game->gridExtend,m,n); //segmentation here
-        cout << "neighbor count = " << neighborCount << " | ";
+        // cout << "neighbor count = " << neighborCount << " | ";
         char newCell = game->nextGeneration(currentCell,neighborCount);
-        cout << "new cell " << newCell << " | ";
+        // cout << "new cell " << newCell << " | ";
         game->updateCellStatus(game->grid,m,n,newCell);
-        cout << "status = " << game->grid[m][n] << endl;
+        // cout << "status = " << game->grid[m][n] << endl;
       }
     }
     ++generationCount;
