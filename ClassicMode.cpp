@@ -20,26 +20,26 @@ ClassicMode::ClassicMode(){
   height = 0;
   density = 0;
   inputFilePath = "";
-  prev1 = NULL;
-  prev2 = NULL;
-  current = NULL;
+  // prev1 = NULL;
+  // prev2 = NULL;
+  // current = NULL;
 }
 ClassicMode::ClassicMode(int w, int h, float d){
   //overlaod constructor if gamestart is random
   width = w;
   height = h;
   density = d;
-  prev1 = NULL;
-  prev2 = NULL;
-  current = NULL;
+  // prev1 = NULL;
+  // prev2 = NULL;
+  // current = NULL;
   /// make a toString() method in GameStart, use that to compare board versions
 }
 ClassicMode::ClassicMode(string filePath){
   // overload constructor if the gamestart is a filepath
   inputFilePath = filePath;
-  prev1 = NULL;
-  prev2 = NULL;
-  current = NULL;
+  // prev1 = NULL;
+  // prev2 = NULL;
+  // current = NULL;
 }
 /*
 Function: ~ClassicMode
@@ -155,7 +155,7 @@ void ClassicMode::runClassicSimulation(char selection){
       }
     }
 
-    cout << "about to compute next generation" << endl;
+    // cout << "about to compute next generation" << endl;
     //after output method, we compute the next generation
     for (int m = 0; m < w; ++m){
       for (int n = 0; n < h; ++n){
@@ -175,6 +175,12 @@ void ClassicMode::runClassicSimulation(char selection){
     if (game->simulationEmpty()){
       simulationEmpty = true;
       //outputFile.close(); //this doesn't work bc its out of the scope
+    }
+    string s1 = game->BoardToString(game->grid);
+    string s2 = game->BoardToString(game->gridExtend);
+    if (s1.compare(s2) == 0){
+      cout << "They are the same" << endl;
+      simulationEmpty = true;
     }
   }
   cout << "GAME OVER!!!" << endl;

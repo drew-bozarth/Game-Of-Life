@@ -46,6 +46,7 @@ public:
   bool simulationEmpty();
   char nextGeneration(char current, int neighbors);
   string getFilePath();
+  string BoardToString(char **board);
   char** grid;
   char** gridExtend;
   int height;

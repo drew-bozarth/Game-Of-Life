@@ -16,6 +16,8 @@ This is the header file for the DoughnutMode class which
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <chrono>
+#include <thread>
 // standard namespace library in C++
 using namespace std;
 

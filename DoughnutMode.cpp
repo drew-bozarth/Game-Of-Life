@@ -125,7 +125,7 @@ void DoughnutMode::runDoughnutSimulation(char selection){
         cout << "\n";
       }
 
-      system("pause"); //press any key to continue...
+      this_thread::sleep_for(.5s); //press any key to continue...
 
     }
     else if (outputSelection == 2){

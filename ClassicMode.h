@@ -36,9 +36,9 @@ public:
   ClassicMode(string filePath);
   ~ClassicMode();
   void runClassicSimulation(char selection);
-  GameStart *prev1;
-  GameStart *prev2;
-  GameStart *current;
+  // GameStart *prev1;
+  // GameStart *prev2;
+  // GameStart *current;
   //This is declaring the private variables for the class
 private:
   int width;

@@ -266,3 +266,29 @@ string GameStart::getFilePath(){
   //returns file path
   return inputFilePath;
 }
+
+string GameStart::BoardToString(char **board){
+  string base = "";
+  char value = ' ';
+  int h = sizeof(board);
+  int w = sizeof(board[0]);
+  if (height < h){
+    for (int j = 0; j < h+2; ++j){
+      for (int k = 0; k < w+2; ++k){
+        value = board[k][j];
+        base += " [";
+        base += value;
+        base += "] ";}
+      base += "\n";}
+  } else {
+  for (int i = 0; i < height; ++i){
+    for (int j = 0; j < width; ++j){
+      value = board[j][i];
+      base += " [";
+      base += value;
+      base += "] ";
+    }
+    base += "\n";}
+  }
+    return base;
+}
