@@ -40,6 +40,7 @@ public:
   void GridFile(string inputFilePath);
   int checkNeighbors(char** grid, int x, int y);
   void extendGrid();
+  void updateCellStatus(char** grid, int x, int y, char status);
   bool isAlive(int x, int y);
   bool isDead(int x, int y);
   bool simulationEmpty();
