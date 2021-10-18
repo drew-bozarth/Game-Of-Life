@@ -177,6 +177,7 @@ void ClassicMode::runClassicSimulation(char selection){
 }
 
 
-
-//https://www.journaldev.com/41740/system-pause-command-c-plus-plus
-// system("pause")
+// system pause alternative, sleep_for
+// https://www.cplusplus.com/reference/thread/this_thread/sleep_for/
+// pausing and pressing Enter key to continue
+// http://www.cplusplus.com/forum/beginner/9353/
