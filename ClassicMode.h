@@ -17,6 +17,8 @@ This is the header file for the ClassicMode class which
 #include <string>
 #include <fstream>
 #include <cstdlib>
+#include <chrono>
+#include <thread>
 // standard namespace library in C++
 using namespace std;
 
@@ -34,6 +36,9 @@ public:
   ClassicMode(string filePath);
   ~ClassicMode();
   void runClassicSimulation(char selection);
+  GameStart *prev1;
+  GameStart *prev2;
+  GameStart *current;
   //This is declaring the private variables for the class
 private:
   int width;
