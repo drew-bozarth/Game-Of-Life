@@ -156,7 +156,7 @@ void ClassicMode::runClassicSimulation(char selection){
       //outputFile.close(); //this doesn't work bc its out of the scope
     }
   }
-
+  cout << "GAME OVER!!!" << endl;
   delete game;
 }
 
