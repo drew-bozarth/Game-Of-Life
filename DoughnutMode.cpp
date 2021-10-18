@@ -50,11 +50,11 @@ void DoughnutMode::runDoughnutSimulation(char selection){
   int h = height;
   int w = width;
   //starts game based on user input
-  if (selection = 'f'){
+  if (selection == 'f'){
   game->GridFile(inputFilePath);
   w = game->width;
   h = game->height;
-} else if (selection = 'r'){
+} else if (selection == 'r'){
   game->GridRandom(width, height, density);
 
 };
@@ -83,6 +83,7 @@ void DoughnutMode::runDoughnutSimulation(char selection){
     game->gridExtend[i][h+1] = game->grid[i-1][0];
   }
 //prints gamebaord
+cout << "extended grid" << endl;
   for (int j = 0; j < h+2; ++j){
     for (int k = 0; k < w+2; ++k){
         cout << " [" << game->gridExtend[k][j] << "] ";
@@ -119,8 +120,8 @@ void DoughnutMode::runDoughnutSimulation(char selection){
     else if (outputSelection == 2){
       //pressing "enter" to continue
       cout << "\n\nGENERATION " << generationCount << "\n\n";
-      for (int j = 0; j < w; ++j){
-        for (int k = 0; k < h; ++k){
+      for (int j = 0; j < h; ++j){
+        for (int k = 0; k < w; ++k){
           cout << "[" << game->grid[j][k] << "]";
         }
         cout << "\n";
@@ -139,8 +140,8 @@ void DoughnutMode::runDoughnutSimulation(char selection){
 
       if(outputFile.is_open()){
         outputFile << "\nGENERATION " << generationCount << "\n\n";
-        for (int j = 0; j < w; ++j){
-          for (int k = 0; k < h; ++k){
+        for (int j = 0; j < h; ++j){
+          for (int k = 0; k < w; ++k){
             outputFile << "[" << game->grid[j][k] << "]";
           }
           outputFile << "\n";
@@ -152,8 +153,8 @@ void DoughnutMode::runDoughnutSimulation(char selection){
     }
 
     //after output method, we compute the next generation
-    for (int j = 0; j < w; ++j){
-      for (int k = 0; k < h; ++k){
+    for (int j = 0; j < h; ++j){
+      for (int k = 0; k < w; ++k){
         current = game->grid[j][k];
           neighbors = game->checkNeighbors(game->gridExtend,j,k);
           current = game->nextGeneration(current,neighbors);

@@ -84,6 +84,8 @@ void GameStart::GridRandom(int w, int h, float d){
       cout << " [" << grid[j][i] << "] ";}
     cout << endl;
   };
+  cout << endl;
+  cout << endl;
 }
 /*
 Function: GridFile

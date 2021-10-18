@@ -16,10 +16,10 @@ Exceptions: none
 */
 MirrorMode::MirrorMode(){
   // default constructor
-  width = 0;
-  height = 0;
-  density = 0;
-  inputFilePath = "";
+  int width = 0;
+  int height = 0;
+  float density = 0;
+  string inputFilePath = "";
 }
 
 MirrorMode::MirrorMode(int w, int h, float d){
@@ -79,7 +79,7 @@ void MirrorMode::runMirrorSimulation(char selection){
     game->gridExtend[0][i] = game->grid[0][i-1];
     game->gridExtend[w+1][i] = game->grid[w-1][i-1] ;
   };
-
+  cout << "extended grid" << endl;
   for (int j = 0; j < h+2; ++j){
     for (int k = 0; k < w+2; ++k){
         cout << " [" << game->gridExtend[k][j] << "] ";
@@ -103,8 +103,8 @@ void MirrorMode::runMirrorSimulation(char selection){
     if (outputSelection == 1) {
       //using system("pause")
       cout << "\n\nGENERATION " << generationCount << "\n\n";
-      for (int j = 0; j < w; ++j){
-        for (int k = 0; k < h; ++k){
+      for (int j = 0; j < h; ++j){
+        for (int k = 0; k < w; ++k){
           cout << "[" << game->grid[j][k] << "]";
         }
         cout << "\n";
@@ -116,8 +116,8 @@ void MirrorMode::runMirrorSimulation(char selection){
     else if (outputSelection == 2){
       //pressing "enter" to continue
       cout << "\n\nGENERATION " << generationCount << "\n\n";
-      for (int j = 0; j < w; ++j){
-        for (int k = 0; k < h; ++k){
+      for (int j = 0; j < h; ++j){
+        for (int k = 0; k < w; ++k){
           cout << "[" << game->grid[j][k] << "]";
         }
         cout << "\n";
@@ -136,8 +136,8 @@ void MirrorMode::runMirrorSimulation(char selection){
 
       if(outputFile.is_open()){
         outputFile << "\nGENERATION " << generationCount << "\n\n";
-        for (int j = 0; j < w; ++j){
-          for (int k = 0; k < h; ++k){
+        for (int j = 0; j < h; ++j){
+          for (int k = 0; k < w; ++k){
             outputFile << "[" << game->grid[j][k] << "]";
           }
           outputFile << "\n";

@@ -94,8 +94,8 @@ void ClassicMode::runClassicSimulation(char selection){
   while (!simulationEmpty){
     if (outputSelection == 1) {
       cout << "\n\nGENERATION " << generationCount << "\n\n";
-      for (int j = 0; j < w; ++j){
-        for (int k = 0; k < h; ++k){
+      for (int j = 0; j < h; ++j){
+        for (int k = 0; k < w; ++k){
           cout << "[" << game->grid[j][k] << "]";
         }
         cout << endl;
@@ -104,12 +104,13 @@ void ClassicMode::runClassicSimulation(char selection){
       system("pause"); //press any key to continue...
 
     }
+
     else if (outputSelection == 2){
       //pressing "enter" to continue
       cout << "\n\nGENERATION " << generationCount << "\n\n";
-      for (int j = 0; j < w; ++j){
-        for (int k = 0; k < h; ++k){
-          cout << "[" << game->grid[j][k] << "]";
+      for (int j = 0; j < h; ++j){
+        for (int k = 0; k < w; ++k){
+          cout << "[" << game->grid[k][j] << "]";
         }
         cout << "\n";
       }
@@ -118,6 +119,7 @@ void ClassicMode::runClassicSimulation(char selection){
       cin.ignore(numeric_limits<streamsize>::max(),'\n');
       cin.get();
     }
+
     else if (outputSelection == 3){
       //prints to a file
       string outputFileName = "";
@@ -127,9 +129,9 @@ void ClassicMode::runClassicSimulation(char selection){
 
       if(outputFile.is_open()){
         outputFile << "\nGENERATION " << generationCount << "\n\n";
-        for (int j = 0; j < w; ++j){
-          for (int k = 0; k < h; ++k){
-            outputFile << "[" << game->grid[j][k] << "]";
+        for (int j = 0; j < h; ++j){
+          for (int k = 0; k < w; ++k){
+            outputFile << "[" << game->grid[k][j] << "]";
           }
           outputFile << "\n";
         }
@@ -138,6 +140,7 @@ void ClassicMode::runClassicSimulation(char selection){
         throw runtime_error("Could not open output file!!");
       }
     }
+
     cout << "about to compute next generation" << endl;
     //after output method, we compute the next generation
     for (int m = 0; m < w; ++m){
