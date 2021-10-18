@@ -16,20 +16,30 @@ Exceptions: none
 */
 ClassicMode::ClassicMode(){
   //defualt constructor seeint certain variable to 0 or null;
-  int width = 0;
-  int height = 0;
-  int density = 0;
-  string inputFilePath = "";
+  width = 0;
+  height = 0;
+  density = 0;
+  inputFilePath = "";
+  prev1 = NULL;
+  prev2 = NULL;
+  current = NULL;
 }
 ClassicMode::ClassicMode(int w, int h, float d){
   //overlaod constructor if gamestart is random
   width = w;
   height = h;
   density = d;
+  prev1 = NULL;
+  prev2 = NULL;
+  current = NULL;
+  /// make a toString() method in GameStart, use that to compare board versions
 }
 ClassicMode::ClassicMode(string filePath){
   // overload constructor if the gamestart is a filepath
   inputFilePath = filePath;
+  prev1 = NULL;
+  prev2 = NULL;
+  current = NULL;
 }
 /*
 Function: ~ClassicMode
@@ -105,8 +115,7 @@ void ClassicMode::runClassicSimulation(char selection){
         }
         cout << endl;
       }
-
-      system("pause"); //press any key to continue...
+      this_thread::sleep_for(.5s);
 
     }
 
@@ -131,7 +140,7 @@ void ClassicMode::runClassicSimulation(char selection){
       cout << "Enter the name of the file you would like to write the output to: " << endl;
       cin >> outputFileName;
       ofstream outputFile (outputFileName);
-
+      // CHANGE THIS TO APPEND TO FILE
       if(outputFile.is_open()){
         outputFile << "\nGENERATION " << generationCount << "\n\n";
         for (int j = 0; j < h; ++j){
@@ -173,6 +182,7 @@ void ClassicMode::runClassicSimulation(char selection){
 }
 
 
-
-//https://www.journaldev.com/41740/system-pause-command-c-plus-plus
-// system("pause")
+// system pause alternative, sleep_for
+// https://www.cplusplus.com/reference/thread/this_thread/sleep_for/
+// pausing and pressing Enter key to continue
+// http://www.cplusplus.com/forum/beginner/9353/

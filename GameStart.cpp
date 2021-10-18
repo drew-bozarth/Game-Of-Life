@@ -163,28 +163,28 @@ int GameStart::checkNeighbors(char** grid, int xGrid, int yGrid){
   int LiveNeighbors = 0;
   int x = xGrid + 1;
   int y = yGrid + 1;
-  if (grid[x-1][y-1] != '-')
+  if (grid[x-1][y-1] == 'X')
     ++LiveNeighbors;
        //check top
-  if (grid[x][y-1] != '-')
+  if (grid[x][y-1] == 'X')
     ++LiveNeighbors;
        //check topright
-  if (grid[x+1][y-1] != '-')
+  if (grid[x+1][y-1] == 'X')
     ++LiveNeighbors;
        //check left
-  if (grid[x-1][y] != '-')
+  if (grid[x-1][y] == 'X')
     ++LiveNeighbors;
        //check right
-  if (grid[x+1][y] != '-')
+  if (grid[x+1][y] == 'X')
     ++LiveNeighbors;
        //check bottom left
-  if (grid[x-1][y+1] != '-')
+  if (grid[x-1][y+1] == 'X')
     ++LiveNeighbors;
        //check bottom
-  if (grid[x][y+1] != '-')
+  if (grid[x][y+1] == 'X')
     ++LiveNeighbors;
        //check bottom right
-  if (grid[x+1][y+1] != '-')
+  if (grid[x+1][y+1] == 'X')
     ++LiveNeighbors;
 
   return LiveNeighbors;
