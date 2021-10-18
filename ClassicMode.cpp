@@ -146,9 +146,13 @@ void ClassicMode::runClassicSimulation(char selection){
     for (int m = 0; m < w; ++m){
       for (int n = 0; n < h; ++n){
         char currentCell = game->grid[m][n];
+        cout << "current cell = " << currentCell << " | ";
         int neighborCount = game->checkNeighbors(game->gridExtend,m,n); //segmentation here
+        cout << "neighbor count = " << neighborCount << " | ";
         char newCell = game->nextGeneration(currentCell,neighborCount);
-        game->grid[m][n] = newCell;
+        cout << "new cell " << newCell << " | ";
+        game->updateCellStatus(game->grid,m,n,newCell);
+        cout << "status = " << game->grid[m][n] << endl;
       }
     }
     ++generationCount;

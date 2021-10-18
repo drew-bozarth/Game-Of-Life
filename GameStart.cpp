@@ -149,6 +149,9 @@ void GameStart::GridFile(string inputFilePath){
    cout << "file closed" << endl;
 
 }
+void GameStart::updateCellStatus(char** grid, int x, int y, char status){
+  grid[x][y] = status;
+}
 /*
 Function: checkNeighbors
 Return: int (number of alive neighbors a cell in the grid has)
