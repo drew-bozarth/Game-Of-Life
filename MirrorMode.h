@@ -1,3 +1,8 @@
+/* Drew Bozarth | Thomas Gooding
+2373658 | 2373468
+dbozarth@chapman.edu | tgooding@chapman.edu
+CPSC 350-02
+Assignment 3 - MirrorMode.h */
 #ifndef MIRRORMODE_H
 #define MIRRORMODE_H
 

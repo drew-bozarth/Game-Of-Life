@@ -5,10 +5,16 @@ CPSC 350-02
 Assignment 3
 
 Source Files:
-FileReader.h
-FileReader.cpp
+GameStart.h
+GameStart.cpp
 Simulation.h
 Simulation.cpp
+ClassicMode.h
+ClassicMode.cpp
+MirrorMode.h
+MirrorMode.cpp
+DoughnutMode.h
+DoughnutMode.cpp
 main.cpp
 Makefile
 
@@ -16,10 +22,11 @@ Known Errors:
 n/a
 
 References:
-Collaborated with Thomas Gooding on assignment.
-I worked on FileReader, Simulation,
-Thomas worked on GridStart,
-We worked together on main, 
+Collaboration of Drew Bozarth and Thomas Gooding on assignment.
+Drew worked on Simulation, iteration on game modes
+Thomas worked on GameStart, board transcribing on game modes (Classic, mirror, Doughnut)
+We worked together on main,
+LearningLad, C Program to generate random numbers within a range of values: https://www.youtube.com/watch?v=ZaZxHzRn-AY
 
 Instructions:
 Start compsci docker container with "start compsci"

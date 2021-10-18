@@ -1,24 +1,26 @@
+/* Drew Bozarth | Thomas Gooding
+2373658 | 2373468
+dbozarth@chapman.edu | tgooding@chapman.edu
+CPSC 350-02
+Assignment 3 - ClassicMode.cpp */
 #include "ClassicMode.h"
 #include "GameStart.h"
 
 ClassicMode::ClassicMode(){
-  // default constructor
-  // GameStart *game = new GameStart();
+  //defualt constructor seeint certain variable to 0 or null;
   int width = 0;
   int height = 0;
   int density = 0;
   string inputFilePath = "";
 }
 ClassicMode::ClassicMode(int w, int h, float d){
-  // GameStart *game = new GameStart();
-  // game->GridRandom(w,h,d);
+  //overlaod constructor if gamestart is random
   width = w;
   height = h;
   density = d;
 }
 ClassicMode::ClassicMode(string filePath){
-  // GameStart *game = new GameStart;
-  // game->GridFile(filePath);
+  // overload constructor if the gamestart is a filepath
   inputFilePath = filePath;
 }
 
@@ -27,14 +29,16 @@ ClassicMode::~ClassicMode(){
 }
 
 void ClassicMode::runClassicSimulation(char selection){
+  //taking parameter selection and determining what gamestart we are playing with
   cout << "in runClassicSimulation" << endl;
   GameStart *game = new GameStart();
+  //game start pointer
   int h = height;
   int w = width;
-  cout << selection << " = selection" << endl;
+  // cout << selection << " = selection" << endl;
+  //starts game based on user input
   if (selection == 'f'){
-    cout << "in if statement" << endl;
-    game->GridFile(inputFilePath);//this has errors (game->inputFilePath)
+    game->GridFile(inputFilePath);
     w = game->width;
     h = game->height;
   }
@@ -44,8 +48,8 @@ void ClassicMode::runClassicSimulation(char selection){
   }
   int neighbors = 0;
   char current;
-  // cout << h << " " << w << endl;
   cout << "Running Classic Mode Simulation" << endl;
+  //writes the established gameboard to an extended version to circumvent index out of bounds when checking neighbors
   for (int j = 0; j < h; ++j){
     for (int k = 0; k < w; ++k){
       game->gridExtend[k+1][j+1] = game->grid[k][j];
@@ -58,12 +62,6 @@ void ClassicMode::runClassicSimulation(char selection){
       game->gridExtend[0][i] = '-';
       game->gridExtend[w+1][i] = '-';
     };
-  // for (int j = 0; j < h+2; ++j){
-  //   for (int k = 0; k < w+2; ++k){
-  //       cout << " [" << game->gridExtend[k][j] << "] ";
-  //     }
-  //     cout << endl;
-  //   }
 
 
   bool simulationEmpty = false;
@@ -71,6 +69,7 @@ void ClassicMode::runClassicSimulation(char selection){
   //GameStart *prevGen;
   int generationCount = 0;
   int outputSelection = -1;
+  //after creating the two boards this asks for user input to continue simulation until end or just to print one generation to a file
   while (outputSelection <= 0 || cin.fail()){
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(),'\n');
@@ -82,7 +81,6 @@ void ClassicMode::runClassicSimulation(char selection){
   cout << "about to start while loop. simulation empty - " << simulationEmpty << endl;
   while (!simulationEmpty){
     if (outputSelection == 1) {
-      //using system("pause")
       cout << "\n\nGENERATION " << generationCount << "\n\n";
       for (int j = 0; j < w; ++j){
         for (int k = 0; k < h; ++k){
@@ -110,7 +108,7 @@ void ClassicMode::runClassicSimulation(char selection){
       cin.get();
     }
     else if (outputSelection == 3){
-      //print to file
+      //prints to a file
       string outputFileName = "";
       cout << "Enter the name of the file you would like to write the output to: " << endl;
       cin >> outputFileName;

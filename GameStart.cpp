@@ -1,6 +1,12 @@
+/* Drew Bozarth | Thomas Gooding
+2373658 | 2373468
+dbozarth@chapman.edu | tgooding@chapman.edu
+CPSC 350-02
+Assignment 3 - Gamestart.cpp */
 #include "GameStart.h"
 
 GameStart::GameStart(){
+  //default constructor creating two different arrays of different sizes
   width = 100;
   height = 100;
   grid = new char*[height];
@@ -10,17 +16,9 @@ GameStart::GameStart(){
   for(int i = 0; i < height+2; i++){
     gridExtend[i] = new char[width+2];}
 }
-// GameStart::GameStart(int w, int h){
-//   width = w;
-//   height = h;
-//   grid = new char*[height];
-//   for(int i = 0; i < width; i++)
-//     grid[i] = new char[width];
-//   gridExtend = new char*[height+1];
-//   for(int i = 0; i < height+1; i++){
-//     gridExtend[i] = new char[width+1];}
-// }
+
 GameStart::~GameStart(){
+  //destructor deleting the two arrays
   for(int i = 0; i < height; i++)
       delete[] grid[i];
   for(int i = 0; i < height+2; i++)
@@ -30,19 +28,17 @@ GameStart::~GameStart(){
 }
 
 void GameStart::GridRandom(int w, int h, float d){
+  //starts a game board with heigh width and density
   width = w;
   height = h;
   density = d;
   int value;
   bool isFull = false;
-  // cout << "before" << endl;
-  // cout << width << " " << height << endl;
   //double for loop to sort through spots
-  //LearningLad, C Program to generate random numbers within a range of values
-  //https://www.youtube.com/watch?v=ZaZxHzRn-AY
   srand(time(NULL));
   for (int i = 0; i < h; ++i){
     for (int k = 0; k < w; ++k){
+      //fills in spot on board based on float given
     value = (rand() % 100);
     if (value <= d*100){
       isFull = true;
@@ -59,7 +55,7 @@ void GameStart::GridRandom(int w, int h, float d){
   }
   // cout << endl;
 }
-  // cout << grid[0][0] << endl;
+//prints grid
   for (int i = 0; i < h; ++i){
     for (int j = 0; j < w; ++j){
       cout << " [" << grid[j][i] << "] ";}
@@ -68,9 +64,11 @@ void GameStart::GridRandom(int w, int h, float d){
 }
 
 void GameStart::GridFile(string inputFilePath){
+  //starts gameboard based on filePath input
   ifstream input;
   input.open(inputFilePath.c_str());
   if (input.is_open()){
+    //checks if file exists
    char current;
    int row = 0;
    string str;
@@ -82,12 +80,15 @@ void GameStart::GridFile(string inputFilePath){
    cout << h << endl;
    getline(input,str);
    w = stoi(str);
+   //first two lines are the height and width
    width = w;
    cout << w << endl;
    grid[w][h];
+   //restablishing gridsize with heigh and width
    while(getline(input,str)){
      // cout << "got line" << endl;
        // cout << str.size() << endl;
+       //iterates through rest of file and fills in character input to the array
     for (int i = 0; i < str.size(); ++i){
          current = str[i];
          if (current == '-'){
@@ -99,15 +100,12 @@ void GameStart::GridFile(string inputFilePath){
          } else {
            cout << "invalid input" << endl;
          }
-         // cout << grid[i][row];
-         // grid[i][row] = current;
-         // cout << current;
        }
          cout << endl;
          cout << row << endl;
        row++;}
-         cout << "readfile" << endl;
-         cout << grid[0][6] << endl;
+         // cout << "readfile" << endl;
+         // cout << grid[0][6] << endl;
          for (int i = 0; i < h; ++i){
            for (int j = 0; j < w; ++j){
              cout << " [" << grid[j][i] << "] ";}
@@ -123,42 +121,38 @@ void GameStart::GridFile(string inputFilePath){
 }
 
 int GameStart::checkNeighbors(char** grid, int x, int y){
+  //function checks neighbors based on array input and placement in grid on x and y axis
   int LiveNeighbors = 0;
 
-  if (grid[x-1][y-1] != '\0')
+  if (grid[x-1][y-1] != '-')
     ++LiveNeighbors;
        //check top
-  if (grid[x][y-1] != '\0')
+  if (grid[x][y-1] != '-')
     ++LiveNeighbors;
        //check topright
-  if (grid[x+1][y-1] != '\0')
+  if (grid[x+1][y-1] != '-')
     ++LiveNeighbors;
        //check left
-  if (grid[x-1][y] != '\0')
+  if (grid[x-1][y] != '-')
     ++LiveNeighbors;
        //check right
-  if (grid[x+1][y] != '\0')
+  if (grid[x+1][y] != '-')
     ++LiveNeighbors;
        //check bottom left
-  if (grid[x-1][y+1] != '\0')
+  if (grid[x-1][y+1] != '-')
     ++LiveNeighbors;
        //check bottom
-  if (grid[x][y+1] != '\0')
+  if (grid[x][y+1] != '-')
     ++LiveNeighbors;
        //check bottom right
-  if (grid[x+1][y+1] != '\0')
+  if (grid[x+1][y+1] != '-')
     ++LiveNeighbors;
 
   return LiveNeighbors;
 }
 
-void GameStart::extendGrid(){
-  gridExtend = new char*[height+1];
-  for(int i = 0; i < height+1; i++)
-    gridExtend[i] = new char[width+1];
-}
-
 bool GameStart::isAlive(int x, int y){
+  //checks if a given spot is alive
   if (grid[x][y] == 'X'){
     return true;
   }
@@ -168,6 +162,7 @@ bool GameStart::isAlive(int x, int y){
 }
 
 bool GameStart::isDead(int x, int y){
+  //checks if a given spot is dead
   if (grid[x][y] == 'X'){
     return false;
   }
@@ -177,6 +172,7 @@ bool GameStart::isDead(int x, int y){
 }
 
 char GameStart::nextGeneration(char current, int neighbors){
+  //returns the next generation of a value based on the current character and the number of neighbors
   if (neighbors <= 1){
     return '-';
   }
@@ -192,5 +188,6 @@ char GameStart::nextGeneration(char current, int neighbors){
 }
 
 string GameStart::getFilePath(){
+  //returns file path
   return inputFilePath;
 }

@@ -1,9 +1,13 @@
+/* Drew Bozarth | Thomas Gooding
+2373658 | 2373468
+dbozarth@chapman.edu | tgooding@chapman.edu
+CPSC 350-02
+Assignment 3 - DoughnutMode.cpp */
 #include "DoughnutMode.h"
 #include "GameStart.h"
 
 DoughnutMode::DoughnutMode(){
   // default constructor
-  // GameStart *game = new GameStart();
   width = 0;
   height = 0;
   density = 0;
@@ -11,16 +15,14 @@ DoughnutMode::DoughnutMode(){
 }
 
 DoughnutMode::DoughnutMode(int w, int h, float d){
-  // GameStart *game = new GameStart();
-  // game->GridRandom(w,h,d);
+  //overlaod constructor if gamestart is random
   width = w;
   height = h;
   density = d;
 }
 
 DoughnutMode::DoughnutMode(string filePath){
-  // GameStart *game = new GameStart;
-  // game->GridFile(filePath);
+  // overload constructor if the gamestart is a filepath
   inputFilePath = filePath;
 }
 
@@ -29,10 +31,12 @@ DoughnutMode::~DoughnutMode(){
 }
 
 void DoughnutMode::runDoughnutSimulation(char selection){
+  //taking parameter selection and determining what gamestart we are playing with
   cout << "Running Doughnut Mode Simulation" << endl;
   GameStart *game = new GameStart();
   int h = height;
   int w = width;
+  //starts game based on user input
   if (selection = 'f'){
   game->GridFile(inputFilePath);
   w = game->width;
@@ -41,25 +45,22 @@ void DoughnutMode::runDoughnutSimulation(char selection){
   game->GridRandom(width, height, density);
 
 };
-cout << "height: " << h << " Width: " << w << endl;
 
   int neighbors = 0;
   char current;
-  // gridExtend = new char*[height+1];
-  // for(int i = 0; i < height+1; i++){
-  //   gridExtend[i] = new char[width+1];}
-  // cout << "for loop" << endl;
   for (int j = 0; j < h; ++j){
     for (int k = 0; k < w; ++k){
       // cout << "writing" << endl;
         game->gridExtend[k+1][j+1] = game->grid[k][j];
       }
     };
+  //writes the corners of the extended grid based on Doughnut rules
   game->gridExtend[0][0] = game->grid[w-1][h-1];
   game->gridExtend[w+1][h+1] = game->grid[0][0];
   game->gridExtend[0][h+1] = game->grid[w-1][0];
   game->gridExtend[w+1][0] = game->grid[0][h-1];
 
+// writes the non-corner sides of extened grid based on mirror rules
   for (int i = 1; i < h+1; ++i){
     game->gridExtend[0][i] = game->grid[w-1][i-1];
     game->gridExtend[w+1][i] = game->grid[0][i-1];
@@ -68,7 +69,7 @@ cout << "height: " << h << " Width: " << w << endl;
     game->gridExtend[i][0] = game->grid[i-1][h-1];
     game->gridExtend[i][h+1] = game->grid[i-1][0];
   }
-
+//prints gamebaord
   for (int j = 0; j < h+2; ++j){
     for (int k = 0; k < w+2; ++k){
         cout << " [" << game->gridExtend[k][j] << "] ";
@@ -80,6 +81,7 @@ cout << "height: " << h << " Width: " << w << endl;
   bool simulationEmpty = false;
   int generationCount = 0;
   int outputSelection = -1;
+  //after creating the two boards this asks for user input to continue simulation until end or just to print one generation to a file
   while (outputSelection <= 0 || cin.fail()){
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(),'\n');

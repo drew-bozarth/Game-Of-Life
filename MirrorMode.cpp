@@ -1,3 +1,8 @@
+/* Drew Bozarth | Thomas Gooding
+2373658 | 2373468
+dbozarth@chapman.edu | tgooding@chapman.edu
+CPSC 350-02
+Assignment 3 - MirrorMode.cpp */
 #include "MirrorMode.h"
 #include "GameStart.h"
 
@@ -10,16 +15,14 @@ MirrorMode::MirrorMode(){
 }
 
 MirrorMode::MirrorMode(int w, int h, float d){
-  // GameStart *game = new GameStart();
-  // game->GridRandom(w,h,d);
+//overlaod constructor if gamestart is random
   width = w;
   height = h;
   density = d;
 }
 
 MirrorMode::MirrorMode(string filePath){
-  // GameStart *game = new GameStart;
-  // game->GridFile(filePath);
+// overload constructor if the gamestart is a filepath
   inputFilePath = filePath;
 }
 
@@ -28,37 +31,33 @@ MirrorMode::~MirrorMode(){
 }
 
 void MirrorMode::runMirrorSimulation(char selection){
+    //taking parameter selection and determining what gamestart we are playing with
   cout << "Running Mirror Mode Simulation" << endl;
   GameStart *game = new GameStart();
   int h = height;
   int w = width;
+    //starts game based on user input
   if (selection == 'f'){
-    cout << "in if statement" << endl;
   game->GridFile(inputFilePath);
   w = game->width;
-  // cout<< "width: " << w << endl;
   h = game->height;
-  // cout << "height: " << h << endl;
 } else if (selection == 'r'){
   game->GridRandom(width, height, density);
-
 }
-// cout << "height: " << h << endl;
-// cout<< "width: " << w << endl;
   int neighbors = 0;
   char current;
   for (int j = 0; j < h; ++j){
     for (int k = 0; k < w; ++k){
         game->gridExtend[k+1][j+1] = game->grid[k][j];
-        // cout << "j-k" << j << "-" << k;
       }
     };
+    //writes the corners of the extended grid based on mirror rules
   game->gridExtend[0][0] = game->grid[0][0];
   game->gridExtend[w+1][h+1] = game->grid[w-1][h-1];
   game->gridExtend[0][h+1] = game->grid[0][h-1];
   game->gridExtend[w+1][0] = game->grid[w-1][0];
 
-
+// writes the non-corner sides of extened grid based on mirror rules
   for (int i = 1; i < w+1; ++i){
     game->gridExtend[i][0] = game->grid[i-1][0];
     game->gridExtend[i][h+1] = game->grid[i-1][h-1];
@@ -79,6 +78,7 @@ void MirrorMode::runMirrorSimulation(char selection){
   bool simulationEmpty = false;
   int generationCount = 0;
   int outputSelection = -1;
+  //after creating the two boards this asks for user input to continue simulation until end or just to print one generation to a file
   while (outputSelection <= 0 || cin.fail()){
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(),'\n');
@@ -115,7 +115,7 @@ void MirrorMode::runMirrorSimulation(char selection){
       cin.get();
     }
     else if (outputSelection == 3){
-      //print to file
+      //prints to a file
       string outputFileName = "";
       cout << "Enter the name of the file you would like to write the output to: " << endl;
       cin >> outputFileName;

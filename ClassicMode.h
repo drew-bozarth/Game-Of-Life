@@ -1,3 +1,9 @@
+/* Drew Bozarth | Thomas Gooding
+2373658 | 2373468
+dbozarth@chapman.edu | tgooding@chapman.edu
+CPSC 350-02
+Assignment 3 - ClassicMode.h */
+
 #ifndef CLASSICMODE_H
 #define CLASSICMODE_H
 

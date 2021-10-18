@@ -1,6 +1,6 @@
-/* Drew Bozarth
-2373658
-dbozarth@chapman.edu
+/* Drew Bozarth | Thomas Gooding
+2373658 | 2373468
+dbozarth@chapman.edu | tgooding@chapman.edu
 CPSC 350-02
 Assignment 3 - Simulation.cpp */
 
