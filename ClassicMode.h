@@ -36,6 +36,7 @@ public:
   ClassicMode(string filePath);
   ~ClassicMode();
   void runClassicSimulation(char selection);
+  int generationCount;
   // GameStart *prev1;
   // GameStart *prev2;
   // GameStart *current;
@@ -45,6 +46,8 @@ private:
   int height;
   float density;
   string inputFilePath;
+  string currBoard;
+  string prevBoard;
 };
 //this is the end to the header guard
 #endif

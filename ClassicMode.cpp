@@ -20,6 +20,9 @@ ClassicMode::ClassicMode(){
   height = 0;
   density = 0;
   inputFilePath = "";
+  currBoard = "";
+  prevBoard = "";
+  generationCount = 0;
   // prev1 = NULL;
   // prev2 = NULL;
   // current = NULL;
@@ -29,6 +32,9 @@ ClassicMode::ClassicMode(int w, int h, float d){
   width = w;
   height = h;
   density = d;
+  currBoard = "";
+  prevBoard = "";
+  generationCount = 0;
   // prev1 = NULL;
   // prev2 = NULL;
   // current = NULL;
@@ -37,6 +43,9 @@ ClassicMode::ClassicMode(int w, int h, float d){
 ClassicMode::ClassicMode(string filePath){
   // overload constructor if the gamestart is a filepath
   inputFilePath = filePath;
+  currBoard = "";
+  prevBoard = "";
+  generationCount = 0;
   // prev1 = NULL;
   // prev2 = NULL;
   // current = NULL;
@@ -80,10 +89,10 @@ void ClassicMode::runClassicSimulation(char selection){
 //     cout << endl;
 
 
-  bool simulationEmpty = false;
+  bool simulationEnd = false;
   //GameStart *currentGen;
   //GameStart *prevGen;
-  int generationCount = 0;
+
   int outputSelection = -1;
   //after creating the two boards this asks for user input to continue simulation until end or just to print one generation to a file
   while (outputSelection <= 0 || cin.fail()){
@@ -94,7 +103,7 @@ void ClassicMode::runClassicSimulation(char selection){
     cin >> outputSelection;
   }
 
-  while (!simulationEmpty){
+  while (!simulationEnd){
     for (int j = 0; j < h; ++j){
       for (int k = 0; k < w; ++k){
         game->gridExtend[k+1][j+1] = game->grid[k][j];
@@ -115,7 +124,7 @@ void ClassicMode::runClassicSimulation(char selection){
         }
         cout << endl;
       }
-      this_thread::sleep_for(.5s);
+      this_thread::sleep_for(.1s);
 
     }
 
@@ -155,6 +164,8 @@ void ClassicMode::runClassicSimulation(char selection){
       }
     }
 
+    currBoard = game->BoardToString(game->grid);
+
     // cout << "about to compute next generation" << endl;
     //after output method, we compute the next generation
     for (int m = 0; m < w; ++m){
@@ -170,17 +181,18 @@ void ClassicMode::runClassicSimulation(char selection){
       }
     }
     ++generationCount;
+    prevBoard = currBoard;
+    currBoard = game->BoardToString(game->grid);
 
     //check if loop needs to end & set simulationEmpty to true & close file
     if (game->simulationEmpty()){
-      simulationEmpty = true;
+      simulationEnd = true;
       //outputFile.close(); //this doesn't work bc its out of the scope
     }
-    string s1 = game->BoardToString(game->grid);
-    string s2 = game->BoardToString(game->gridExtend);
-    if (s1.compare(s2) == 0){
-      cout << "They are the same" << endl;
-      simulationEmpty = true;
+    //check if the previous generation and the current generation are the exact same
+    if (prevBoard.compare(currBoard) == 0){
+      cout << "Simulation Stabilized!" << endl;
+      simulationEnd = true;
     }
   }
   cout << "GAME OVER!!!" << endl;
