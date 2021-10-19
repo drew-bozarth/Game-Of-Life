@@ -23,6 +23,8 @@ DoughnutMode::DoughnutMode(){
   currBoard = "";
   prevBoard = "";
   generationCount = 0;
+  gotFileName = false;
+  outputFileName = "";
 }
 
 DoughnutMode::DoughnutMode(int w, int h, float d){
@@ -33,6 +35,8 @@ DoughnutMode::DoughnutMode(int w, int h, float d){
   currBoard = "";
   prevBoard = "";
   generationCount = 0;
+  gotFileName = false;
+  outputFileName = "";
 }
 
 DoughnutMode::DoughnutMode(string filePath){
@@ -41,6 +45,8 @@ DoughnutMode::DoughnutMode(string filePath){
   currBoard = "";
   prevBoard = "";
   generationCount = 0;
+  gotFileName = false;
+  outputFileName = "";
 }
 /*
 Function: ~DoughnutMode
@@ -132,10 +138,15 @@ void DoughnutMode::runDoughnutSimulation(char selection){
     }
     else if (outputSelection == 3){
       //print to file
-      string outputFileName = "";
-      cout << "Enter the name of the file you would like to write the output to: " << endl;
-      cin >> outputFileName;
-      ofstream outputFile (outputFileName);
+      if (!gotFileName){
+        cout << "Enter the name of the file you would like to write the output to: " << endl;
+        cin >> outputFileName;
+        gotFileName = true;
+        ofstream outputFile (outputFileName);
+        outputFile << "";
+      }
+      ofstream outputFile;
+      outputFile.open(outputFileName, std::ios_base::app);
 
       if(outputFile.is_open()){
         outputFile << "\nGENERATION " << generationCount << "\n\n";

@@ -23,6 +23,8 @@ MirrorMode::MirrorMode(){
   currBoard = "";
   prevBoard = "";
   generationCount = 0;
+  gotFileName = false;
+  outputFileName = "";
 }
 
 MirrorMode::MirrorMode(int w, int h, float d){
@@ -33,6 +35,8 @@ MirrorMode::MirrorMode(int w, int h, float d){
   currBoard = "";
   prevBoard = "";
   generationCount = 0;
+  gotFileName = false;
+  outputFileName = "";
 }
 
 MirrorMode::MirrorMode(string filePath){
@@ -40,6 +44,8 @@ MirrorMode::MirrorMode(string filePath){
   inputFilePath = filePath;currBoard = "";
   prevBoard = "";
   generationCount = 0;
+  gotFileName = false;
+  outputFileName = "";
 }
 /*
 Function: ~MirrorMode
@@ -98,7 +104,7 @@ void MirrorMode::runMirrorSimulation(char selection){
   game->gridExtend[w+1][h+1] = game->grid[w-1][h-1];
   game->gridExtend[0][h+1] = game->grid[0][h-1];
   game->gridExtend[w+1][0] = game->grid[w-1][0];
-  
+
     if (outputSelection == 1) {
       //using brief pause between generations
       cout << "\n\nGENERATION " << generationCount << "\n\n";
@@ -128,10 +134,15 @@ void MirrorMode::runMirrorSimulation(char selection){
     }
     else if (outputSelection == 3){
       //prints to a file
-      string outputFileName = "";
-      cout << "Enter the name of the file you would like to write the output to: " << endl;
-      cin >> outputFileName;
-      ofstream outputFile (outputFileName);
+      if (!gotFileName){
+        cout << "Enter the name of the file you would like to write the output to: " << endl;
+        cin >> outputFileName;
+        gotFileName = true;
+        ofstream outputFile (outputFileName);
+        outputFile << "";
+      }
+      ofstream outputFile;
+      outputFile.open(outputFileName, std::ios_base::app);
 
       if(outputFile.is_open()){
         outputFile << "\nGENERATION " << generationCount << "\n\n";

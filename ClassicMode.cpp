@@ -23,6 +23,8 @@ ClassicMode::ClassicMode(){
   currBoard = "";
   prevBoard = "";
   generationCount = 0;
+  gotFileName = false;
+  outputFileName = "";
   // prev1 = NULL;
   // prev2 = NULL;
   // current = NULL;
@@ -35,6 +37,8 @@ ClassicMode::ClassicMode(int w, int h, float d){
   currBoard = "";
   prevBoard = "";
   generationCount = 0;
+  gotFileName = false;
+  outputFileName = "";
   // prev1 = NULL;
   // prev2 = NULL;
   // current = NULL;
@@ -46,6 +50,8 @@ ClassicMode::ClassicMode(string filePath){
   currBoard = "";
   prevBoard = "";
   generationCount = 0;
+  gotFileName = false;
+  outputFileName = "";
   // prev1 = NULL;
   // prev2 = NULL;
   // current = NULL;
@@ -137,11 +143,16 @@ void ClassicMode::runClassicSimulation(char selection){
 
     else if (outputSelection == 3){
       //prints to a file
-      string outputFileName = "";
-      cout << "Enter the name of the file you would like to write the output to: " << endl;
-      cin >> outputFileName;
-      std::ofstream outputFile;
+      if (!gotFileName){
+        cout << "Enter the name of the file you would like to write the output to: " << endl;
+        cin >> outputFileName;
+        gotFileName = true;
+        ofstream outputFile (outputFileName);
+        outputFile << "";
+      }
+      ofstream outputFile;
       outputFile.open(outputFileName, std::ios_base::app);
+
       if(outputFile.is_open()){
         outputFile << "\nGENERATION " << generationCount << "\n\n";
         for (int j = 0; j < h; ++j){

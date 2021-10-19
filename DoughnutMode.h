@@ -45,6 +45,8 @@ private:
   string currBoard;
   string prevBoard;
   string prevprevBoard;
+  bool gotFileName;
+  string outputFileName;
 };
 //this is the end to the header guard
 #endif
