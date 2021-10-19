@@ -35,12 +35,16 @@ public:
   MirrorMode(string filePath);
   ~MirrorMode();
   void runMirrorSimulation(char selection);
+  int generationCount;
   //This is declaring the private variables for the class
 private:
   int width;
   int height;
   float density;
   string inputFilePath;
+  string currBoard;
+  string prevBoard;
+  string prevprevBoard;
 };
 //this is the end to the header guard
 #endif

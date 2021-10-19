@@ -48,6 +48,7 @@ private:
   string inputFilePath;
   string currBoard;
   string prevBoard;
+  string prevprevBoard;
 };
 //this is the end to the header guard
 #endif

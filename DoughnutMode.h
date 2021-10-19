@@ -35,13 +35,16 @@ public:
   DoughnutMode(string filePath);
   ~DoughnutMode();
   void runDoughnutSimulation(char selection);
-  // void WriteExtendedGridDoughnut(char** g, char** gE);
+  int generationCount;
 private:
   //This is declaring the private variables for the class
   int width;
   int height;
   float density;
   string inputFilePath;
+  string currBoard;
+  string prevBoard;
+  string prevprevBoard;
 };
 //this is the end to the header guard
 #endif

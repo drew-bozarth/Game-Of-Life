@@ -143,7 +143,7 @@ void GameStart::GridFile(string inputFilePath){
        };
 
    } else {
-     cout << "No file found, please enter again" << endl;
+     throw runtime_error("lFile not found!!");
    }
    input.close();
    cout << "file closed" << endl;

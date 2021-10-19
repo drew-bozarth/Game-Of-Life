@@ -81,18 +81,8 @@ void ClassicMode::runClassicSimulation(char selection){
   int neighbors = 0;
   char current;
   cout << endl;
-  //writes the established gameboard to an extended version to circumvent index out of bounds when checking neighbors
-
-// for (int j = 0; j < h+2; ++j){
-//   for (int k = 0; k < w+2; ++k){
-//     cout << "[" << game->gridExtend[k][j] << "]";}
-//     cout << endl;
-
 
   bool simulationEnd = false;
-  //GameStart *currentGen;
-  //GameStart *prevGen;
-
   int outputSelection = -1;
   //after creating the two boards this asks for user input to continue simulation until end or just to print one generation to a file
   while (outputSelection <= 0 || cin.fail()){
@@ -116,7 +106,9 @@ void ClassicMode::runClassicSimulation(char selection){
         game->gridExtend[0][i] = '-';
       game->gridExtend[w+1][i] = '-';
       };
+
     if (outputSelection == 1) {
+      //using brief pause between generations
       cout << "\n\nGENERATION " << generationCount << "\n\n";
       for (int j = 0; j < h; ++j){
         for (int k = 0; k < w; ++k){
@@ -124,7 +116,7 @@ void ClassicMode::runClassicSimulation(char selection){
         }
         cout << endl;
       }
-      this_thread::sleep_for(.1s);
+      this_thread::sleep_for(.5s); //pauses for .5 seconds between generation outputs
 
     }
 
@@ -148,8 +140,8 @@ void ClassicMode::runClassicSimulation(char selection){
       string outputFileName = "";
       cout << "Enter the name of the file you would like to write the output to: " << endl;
       cin >> outputFileName;
-      ofstream outputFile (outputFileName);
-      // CHANGE THIS TO APPEND TO FILE
+      std::ofstream outputFile;
+      outputFile.open(outputFileName, std::ios_base::app);
       if(outputFile.is_open()){
         outputFile << "\nGENERATION " << generationCount << "\n\n";
         for (int j = 0; j < h; ++j){
@@ -162,25 +154,22 @@ void ClassicMode::runClassicSimulation(char selection){
       else{
         throw runtime_error("Could not open output file!!");
       }
+      outputFile.close();
     }
 
     currBoard = game->BoardToString(game->grid);
 
-    // cout << "about to compute next generation" << endl;
     //after output method, we compute the next generation
     for (int m = 0; m < w; ++m){
       for (int n = 0; n < h; ++n){
         char currentCell = game->grid[m][n];
-        // cout << "current cell = " << currentCell << " | ";
-        int neighborCount = game->checkNeighbors(game->gridExtend,m,n); //segmentation here
-        // cout << "neighbor count = " << neighborCount << " | ";
+        int neighborCount = game->checkNeighbors(game->gridExtend,m,n);
         char newCell = game->nextGeneration(currentCell,neighborCount);
-        // cout << "new cell " << newCell << " | ";
         game->updateCellStatus(game->grid,m,n,newCell);
-        // cout << "status = " << game->grid[m][n] << endl;
       }
     }
     ++generationCount;
+    prevprevBoard = prevBoard;
     prevBoard = currBoard;
     currBoard = game->BoardToString(game->grid);
 
@@ -192,6 +181,12 @@ void ClassicMode::runClassicSimulation(char selection){
     //check if the previous generation and the current generation are the exact same
     if (prevBoard.compare(currBoard) == 0){
       cout << "Simulation Stabilized!" << endl;
+      simulationEnd = true;
+    }
+    //check if the generation before the previous generation is the same as the current generation,
+    // because that would mean the simulation is oscilating
+    else if (prevprevBoard.compare(currBoard) == 0){
+      cout << "Simulation is Oscilating!" << endl;
       simulationEnd = true;
     }
   }

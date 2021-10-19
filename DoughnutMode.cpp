@@ -20,6 +20,9 @@ DoughnutMode::DoughnutMode(){
   height = 0;
   density = 0;
   inputFilePath = "";
+  currBoard = "";
+  prevBoard = "";
+  generationCount = 0;
 }
 
 DoughnutMode::DoughnutMode(int w, int h, float d){
@@ -27,11 +30,17 @@ DoughnutMode::DoughnutMode(int w, int h, float d){
   width = w;
   height = h;
   density = d;
+  currBoard = "";
+  prevBoard = "";
+  generationCount = 0;
 }
 
 DoughnutMode::DoughnutMode(string filePath){
   // overload constructor if the gamestart is a filepath
   inputFilePath = filePath;
+  currBoard = "";
+  prevBoard = "";
+  generationCount = 0;
 }
 /*
 Function: ~DoughnutMode
@@ -45,7 +54,6 @@ DoughnutMode::~DoughnutMode(){
 
 void DoughnutMode::runDoughnutSimulation(char selection){
   //taking parameter selection and determining what gamestart we are playing with
-  cout << "Running Doughnut Mode Simulation" << endl;
   GameStart *game = new GameStart();
   int h = height;
   int w = width;
@@ -61,25 +69,10 @@ void DoughnutMode::runDoughnutSimulation(char selection){
 
   int neighbors = 0;
   char current;
+  cout << endl;
 
-//prints gamebaord
-// WriteExtendedGridDoughnut(game->grid,game->gridExtend);
-// cout << "extended grid" << endl;
-//   for (int j = 0; j < h+2; ++j){
-//     for (int k = 0; k < w+2; ++k){
-//         cout << " [" << game->gridExtend[k][j] << "] ";
-//       }
-//       cout << endl;
-//     }
-
-
-  bool simulationEmpty = false;
-  int generationCount = 0;
+  bool simulationEnd = false;
   int outputSelection = -1;
-  // for (int i = 0; i < h; ++i){
-  //   for (int j = 0; j < w; ++j){
-  //     cout << " [" << game->grid[j][i] << "] ";}
-  //   cout << endl;}
   //after creating the two boards this asks for user input to continue simulation until end or just to print one generation to a file
   while (outputSelection <= 0 || cin.fail()){
     cin.clear();
@@ -88,14 +81,14 @@ void DoughnutMode::runDoughnutSimulation(char selection){
     cout << "1. Brief pause between generations\n2. Press 'Enter' key to display next generation\n3. Output to a file" << endl;
     cin >> outputSelection;
   }
-  while (!simulationEmpty){
+  while (!simulationEnd){
     for (int j = 0; j < h; ++j){
       for (int k = 0; k < w; ++k){
         // cout << "writing" << endl;
           game->gridExtend[k+1][j+1] = game->grid[k][j];
         }
       }
-  // writes the non-corner sides of extened grid based on mirror rules
+  // writes the non-corner sides of extened grid based on doughnut rules
     for (int i = 0; i < h+1; ++i){
       game->gridExtend[0][i+1] = game->grid[w-1][i];
       game->gridExtend[w+1][i+1] = game->grid[0][i];
@@ -109,14 +102,9 @@ void DoughnutMode::runDoughnutSimulation(char selection){
     game->gridExtend[w+1][h+1] = game->grid[0][0];
     game->gridExtend[0][h+1] = game->grid[w-1][0];
     game->gridExtend[w+1][0] = game->grid[0][h-1];
-      // for (int j = 0; j < h+2; ++j){
-      //   for (int k = 0; k < w+2; ++k){
-      //       cout << " [" << game->gridExtend[k][j] << "] ";
-      //     }
-      //     cout << endl;
-      //   }
+
     if (outputSelection == 1) {
-      //using system("pause")
+      //using brief pause between generations
       cout << "\n\nGENERATION " << generationCount << "\n\n";
       for (int j = 0; j < h; ++j){
         for (int k = 0; k < w; ++k){
@@ -125,7 +113,7 @@ void DoughnutMode::runDoughnutSimulation(char selection){
         cout << "\n";
       }
 
-      this_thread::sleep_for(.5s); //press any key to continue...
+      this_thread::sleep_for(.5s); //pauses for .5 seconds between generation outputs
 
     }
     else if (outputSelection == 2){
@@ -163,22 +151,38 @@ void DoughnutMode::runDoughnutSimulation(char selection){
       }
     }
 
+    currBoard = game->BoardToString(game->grid);
+
     //after output method, we compute the next generation
     for (int j = 0; j < h; ++j){
       for (int k = 0; k < w; ++k){
-        current = game->grid[j][k];
-          neighbors = game->checkNeighbors(game->gridExtend,j,k);
-          current = game->nextGeneration(current,neighbors);
-          game->grid[j][k] = current;
+        char currentCell = game->grid[j][k];
+        int neighborCount = game->checkNeighbors(game->gridExtend,j,k);
+        char newCell = game->nextGeneration(currentCell,neighborCount);
+        game->updateCellStatus(game->grid,j,k,newCell);
       }
     }
     ++generationCount;
-
+    prevprevBoard = prevBoard;
+    prevBoard = currBoard;
+    currBoard = game->BoardToString(game->grid);
     //check if loop needs to end & set simulationEmpty to true & close file
-    if (2 == 1){
-      simulationEmpty = true;
+    if (game->simulationEmpty()){
+      simulationEnd = true;
       //outputFile.close(); //this doesn't work bc its out of the scope
     }
+    //check if the previous generation and the current generation are the exact same
+    if (prevBoard.compare(currBoard) == 0){
+      cout << "Simulation Stabilized!" << endl;
+      simulationEnd = true;
+    }
+    //check if the generation before the previous generation is the same as the current generation,
+    // because that would mean the simulation is oscilating
+    else if (prevprevBoard.compare(currBoard) == 0){
+      cout << "Simulation is Oscilating!" << endl;
+      simulationEnd = true;
+    }
   }
-
+  cout << "GAME OVER!!!" << endl;
+  delete game;
 }

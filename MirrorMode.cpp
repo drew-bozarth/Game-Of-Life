@@ -16,10 +16,13 @@ Exceptions: none
 */
 MirrorMode::MirrorMode(){
   // default constructor
-  int width = 0;
-  int height = 0;
-  float density = 0;
-  string inputFilePath = "";
+  width = 0;
+  height = 0;
+  density = 0;
+  inputFilePath = "";
+  currBoard = "";
+  prevBoard = "";
+  generationCount = 0;
 }
 
 MirrorMode::MirrorMode(int w, int h, float d){
@@ -27,11 +30,16 @@ MirrorMode::MirrorMode(int w, int h, float d){
   width = w;
   height = h;
   density = d;
+  currBoard = "";
+  prevBoard = "";
+  generationCount = 0;
 }
 
 MirrorMode::MirrorMode(string filePath){
 // overload constructor if the gamestart is a filepath
-  inputFilePath = filePath;
+  inputFilePath = filePath;currBoard = "";
+  prevBoard = "";
+  generationCount = 0;
 }
 /*
 Function: ~MirrorMode
@@ -45,7 +53,6 @@ MirrorMode::~MirrorMode(){
 
 void MirrorMode::runMirrorSimulation(char selection){
     //taking parameter selection and determining what gamestart we are playing with
-  cout << "Running Mirror Mode Simulation" << endl;
   GameStart *game = new GameStart();
   int h = height;
   int w = width;
@@ -59,10 +66,9 @@ void MirrorMode::runMirrorSimulation(char selection){
 }
   int neighbors = 0;
   char current;
+  cout << endl;
 
-
-  bool simulationEmpty = false;
-  int generationCount = 0;
+  bool simulationEnd = false;
   int outputSelection = -1;
   //after creating the two boards this asks for user input to continue simulation until end or just to print one generation to a file
   while (outputSelection <= 0 || cin.fail()){
@@ -72,7 +78,7 @@ void MirrorMode::runMirrorSimulation(char selection){
     cout << "1. Brief pause between generations\n2. Press 'Enter' key to display next generation\n3. Output to a file" << endl;
     cin >> outputSelection;
   }
-  while (!simulationEmpty){
+  while (!simulationEnd){
     for (int j = 0; j < h; ++j){
       for (int k = 0; k < w; ++k){
           game->gridExtend[k+1][j+1] = game->grid[k][j];
@@ -92,15 +98,9 @@ void MirrorMode::runMirrorSimulation(char selection){
   game->gridExtend[w+1][h+1] = game->grid[w-1][h-1];
   game->gridExtend[0][h+1] = game->grid[0][h-1];
   game->gridExtend[w+1][0] = game->grid[w-1][0];
-    // cout << "extended grid" << endl;
-    for (int j = 0; j < h+2; ++j){
-      for (int k = 0; k < w+2; ++k){
-          cout << " [" << game->gridExtend[k][j] << "] ";
-        }
-        cout << endl;
-      }
+  
     if (outputSelection == 1) {
-      //using system("pause")
+      //using brief pause between generations
       cout << "\n\nGENERATION " << generationCount << "\n\n";
       for (int j = 0; j < h; ++j){
         for (int k = 0; k < w; ++k){
@@ -109,7 +109,7 @@ void MirrorMode::runMirrorSimulation(char selection){
         cout << "\n";
       }
 
-      this_thread::sleep_for(.5s); //press any key to continue...
+      this_thread::sleep_for(.5s); //pauses for .5 seconds between generation outputs
 
     }
     else if (outputSelection == 2){
@@ -147,21 +147,39 @@ void MirrorMode::runMirrorSimulation(char selection){
       }
     }
 
+    currBoard = game->BoardToString(game->grid);
+
     //after output method, we compute the next generation
     for (int j = 0; j < w; ++j){
       for (int k = 0; k < h; ++k){
-        current = game->grid[j][k];
-          neighbors = game->checkNeighbors(game->gridExtend,j,k);
-          current = game->nextGeneration(current,neighbors);
-          game->grid[j][k] = current;
+        char currentCell = game->grid[j][k];
+        int neighborCount = game->checkNeighbors(game->gridExtend,j,k);
+        char newCell = game->nextGeneration(currentCell,neighborCount);
+        game->updateCellStatus(game->grid,j,k,newCell);
       }
     }
     ++generationCount;
+    prevprevBoard = prevBoard;
+    prevBoard = currBoard;
+    currBoard = game->BoardToString(game->grid);
 
     //check if loop needs to end & set simulationEmpty to true & close file
-    if (2 == 1){
-      simulationEmpty = true;
+    if (game->simulationEmpty()){
+      simulationEnd = true;
       //outputFile.close(); //this doesn't work bc its out of the scope
     }
+    //check if the previous generation and the current generation are the exact same
+    if (prevBoard.compare(currBoard) == 0){
+      cout << "Simulation Stabilized!" << endl;
+      simulationEnd = true;
+    }
+    //check if the generation before the previous generation is the same as the current generation,
+    // because that would mean the simulation is oscilating
+    else if (prevprevBoard.compare(currBoard) == 0){
+      cout << "Simulation is Oscilating!" << endl;
+      simulationEnd = true;
+    }
   }
+  cout << "GAME OVER!!!" << endl;
+  delete game;
 }

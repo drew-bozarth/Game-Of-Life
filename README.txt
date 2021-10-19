@@ -29,6 +29,7 @@ We worked together on main, on debugging, and on the general planning for our so
 LearningLad, C Program to generate random numbers within a range of values: https://www.youtube.com/watch?v=ZaZxHzRn-AY
 Cplusplus.com, sleep_for command to pause the console output for printing generations with a set pause between generations https://www.cplusplus.com/reference/thread/this_thread/sleep_for/
 Cplusplus.com, using cin.get() and cin.ignore() to pause the program output and wait for the user to hit ENTER to continue http://www.cplusplus.com/forum/beginner/9353/
+** note ** we did insert the check for if the simulation is oscilating :)
 
 Instructions:
 Start compsci docker container with "start compsci"
